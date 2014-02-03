@@ -15,10 +15,6 @@
     UIBezierPath *radarGridPath;
 }
 
-/*@property (nonatomic,strong) CAShapeLayer *radarGrid;
-@property (nonatomic,strong) UIColor *radarGridColor; */
-
-
 @end
 
 @implementation RadarView
@@ -27,7 +23,6 @@
     radarGridLayer = [CAShapeLayer layer];
     radarGridColor = [UIColor whiteColor].CGColor;
     radarGridLineWidth = 1.0;
-    //radarGridContext = CGLayerGetContext((__bridge CGLayerRef)(radarGridLayer));
 }
 
 -(id) initWithFrame:(CGRect)frame
@@ -136,20 +131,23 @@
     
 }
 
-#define DONUT_WIDTH 10
+#define DONUT_WIDTH 8
 #define OUTER_DONUT_SIZE 24
+
 
 -(void) drawDonutAtPt:(CGPoint)pt withColor:(UIColor*)donutColor {
     CAShapeLayer *donutLayer = [CAShapeLayer layer];
-    [donutLayer setStrokeColor:[UIColor clearColor].CGColor];
-    [donutLayer setFillColor:donutColor.CGColor];
+    [donutLayer setStrokeColor:donutColor.CGColor];
+    [donutLayer setFillColor:[UIColor clearColor].CGColor];
     donutLayer.bounds = CGRectMake(0, 0, OUTER_DONUT_SIZE, OUTER_DONUT_SIZE);
+    donutLayer.backgroundColor = [UIColor clearColor].CGColor;
     donutLayer.position = pt;
-    donutLayer.opacity = 0.5;
-    UIBezierPath *donutPath = [UIBezierPath bezierPathWithOvalInRect:donutLayer.bounds];
-    CGRect innerDonut = CGRectInset(donutLayer.bounds, DONUT_WIDTH, DONUT_WIDTH);
-    [donutPath appendPath:[UIBezierPath bezierPathWithOvalInRect:innerDonut]];
-    [donutPath fill];
+    donutLayer.opacity = 1.0;
+    donutLayer.lineWidth = DONUT_WIDTH;
+    donutLayer.borderWidth = 0.0;
+    CGRect outerRect = donutLayer.bounds;
+    
+    UIBezierPath *donutPath = [UIBezierPath bezierPathWithOvalInRect:outerRect];
     [donutPath stroke];
     donutLayer.path = donutPath.CGPath;
     [self.layer addSublayer:donutLayer];
@@ -167,7 +165,7 @@
     dotLayer.opacity = 1.0;
     UIBezierPath *dotPath = [UIBezierPath bezierPathWithOvalInRect:dotLayer.bounds];
     dotPath.lineWidth = 2.0;
-    dotPath.usesEvenOddFillRule = YES;
+    //dotPath.usesEvenOddFillRule = YES;
     [dotPath fill];
     [dotPath stroke];
     dotLayer.path = dotPath.CGPath;
@@ -180,7 +178,9 @@
 {
     [self drawRadarGrid];
     [self drawDotAtPt:CGPointMake(55, 70) withColor:[UIColor blueColor]];
-    [self drawDonutAtPt:CGPointMake(55, 70) withColor:[UIColor greenColor]];
+    
+    [self drawDonutAtPt:CGPointMake(80, 90) withColor:[UIColor greenColor]];
+    
     [self drawDotAtPt:CGPointMake(240, 130) withColor:[UIColor redColor]];
     [self drawDotAtPt:CGPointMake(185, 170) withColor:[UIColor blueColor]];
     [self drawDotAtPt:CGPointMake(80, 90) withColor:[UIColor greenColor]];
