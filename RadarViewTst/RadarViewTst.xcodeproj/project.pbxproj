@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4077FA1A18A1B92A005B9A5F /* EventBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 4077FA1918A1B92A005B9A5F /* EventBall.m */; };
 		409AA40D18976E9900DA9755 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409AA40C18976E9900DA9755 /* Foundation.framework */; };
 		409AA40F18976E9900DA9755 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409AA40E18976E9900DA9755 /* CoreGraphics.framework */; };
 		409AA41118976E9900DA9755 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409AA41018976E9900DA9755 /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4077FA1818A1B92A005B9A5F /* EventBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventBall.h; sourceTree = "<group>"; };
+		4077FA1918A1B92A005B9A5F /* EventBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventBall.m; sourceTree = "<group>"; };
 		409AA40918976E9900DA9755 /* RadarViewTst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadarViewTst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		409AA40C18976E9900DA9755 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		409AA40E18976E9900DA9755 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -121,9 +124,11 @@
 				409AA42118976E9900DA9755 /* ViewController.h */,
 				409AA42218976E9900DA9755 /* ViewController.m */,
 				409AA42418976E9900DA9755 /* Images.xcassets */,
-				409AA41318976E9900DA9755 /* Supporting Files */,
 				409AA44118976FB900DA9755 /* RadarView.h */,
 				409AA44218976FB900DA9755 /* RadarView.m */,
+				4077FA1818A1B92A005B9A5F /* EventBall.h */,
+				4077FA1918A1B92A005B9A5F /* EventBall.m */,
+				409AA41318976E9900DA9755 /* Supporting Files */,
 			);
 			path = RadarViewTst;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 			files = (
 				409AA42318976E9900DA9755 /* ViewController.m in Sources */,
 				409AA41D18976E9900DA9755 /* AppDelegate.m in Sources */,
+				4077FA1A18A1B92A005B9A5F /* EventBall.m in Sources */,
 				409AA41918976E9900DA9755 /* main.m in Sources */,
 				409AA44318976FB900DA9755 /* RadarView.m in Sources */,
 			);
@@ -466,6 +472,7 @@
 				409AA43D18976E9900DA9755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		409AA43E18976E9900DA9755 /* Build configuration list for PBXNativeTarget "RadarViewTstTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +481,7 @@
 				409AA44018976E9900DA9755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

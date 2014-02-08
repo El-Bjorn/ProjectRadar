@@ -7,6 +7,7 @@
 //
 
 #import "RadarView.h"
+#import "EventBall.h"
 
 @interface RadarView () {
     CAShapeLayer *radarGridLayer;
@@ -14,6 +15,8 @@
     float radarGridLineWidth;
     UIBezierPath *radarGridPath;
 }
+// here's where we store the event balls
+@property (nonatomic,strong) NSMutableArray *radarEvents;
 
 @end
 
@@ -23,6 +26,17 @@
     radarGridLayer = [CAShapeLayer layer];
     radarGridColor = [UIColor whiteColor].CGColor;
     radarGridLineWidth = 1.0;
+    self.radarEvents= [[NSMutableArray alloc] init];
+    
+    //[self drawDotAtPt:CGPointMake(240, 130) withColor:[UIColor redColor]];
+    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(240,130) andIdent:@"bigJob"];
+    [self createEventWithColor:[UIColor purpleColor] andPosition:CGPointMake(240,130) andIdent:@"bigJob"];
+
+    //[self drawDotAtPt:CGPointMake(185, 170) withColor:[UIColor blueColor]];
+    [self createEventWithColor:[UIColor blueColor] andPosition:CGPointMake(185,170) andIdent:@"littleJob"];
+    
+    [self eventWithIdent:@"bigJob"];
+    
 }
 
 -(id) initWithFrame:(CGRect)frame
@@ -61,7 +75,7 @@
     drawPt.x = self.bounds.size.width-RADAR_GRID_LINE_INSET;
     [linePath addLineToPoint:drawPt];
  
-    [linePath stroke];
+    //[linePath stroke];
     
     UIBezierPath *linePath2 = [linePath copy];
     CGAffineTransform toOrigin = CGAffineTransformMakeTranslation(-CGRectGetMidX(self.bounds), -(CGRectGetMidY(self.bounds)));
@@ -72,7 +86,7 @@
     [linePath2 applyTransform:lineSpin];
     [linePath2 applyTransform:fromOrigin];
     
-    [linePath2 stroke];
+    //[linePath2 stroke];
     [radarGridPath appendPath:linePath];
     [radarGridPath appendPath:linePath2];
     
@@ -173,17 +187,38 @@
     
 }
 
+-(void) createEventWithColor:(UIColor*)color andPosition:(CGPoint)pt andIdent:(NSString*)ident {
+    EventBall *b = [[EventBall alloc] initWithColor:color andPosition:pt andIdent:ident];
+    [self.radarEvents addObject:b];
+}
+
+-(void) displayEvents {
+    for (EventBall *b in self.radarEvents) {
+        [self.layer addSublayer:[b eventBallLayer]];
+    }
+}
+
+-(EventBall*) eventWithIdent:(NSString*)ident {
+    int eventIndex = [self.radarEvents indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            EventBall* b = obj;
+            return [b.identifier isEqualToString:ident];
+    }];
+    NSLog(@"found event with ident %@: %@",ident,self.radarEvents[eventIndex]);
+    return self.radarEvents[eventIndex];    
+}
+
 
 -(void) drawRect:(CGRect)rect
 {
     [self drawRadarGrid];
-    [self drawDotAtPt:CGPointMake(55, 70) withColor:[UIColor blueColor]];
+    [self displayEvents];
     
-    [self drawDonutAtPt:CGPointMake(80, 90) withColor:[UIColor greenColor]];
     
-    [self drawDotAtPt:CGPointMake(240, 130) withColor:[UIColor redColor]];
-    [self drawDotAtPt:CGPointMake(185, 170) withColor:[UIColor blueColor]];
-    [self drawDotAtPt:CGPointMake(80, 90) withColor:[UIColor greenColor]];
+    //[self drawDotAtPt:CGPointMake(80, 90) withColor:[UIColor greenColor]];
+    //CALayer *ballLayer;
+    //EventBall *a = [[EventBall alloc] initWithColor:[UIColor yellowColor] andPosition:CGPointMake(80,140)];
+    //ballLayer = [a eventBallLayer];
+    //[self.layer addSublayer:ballLayer];
 
 }
 
