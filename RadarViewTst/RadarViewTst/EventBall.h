@@ -11,15 +11,18 @@
 @interface EventBall : NSObject
 
 @property (nonatomic,strong) UIColor *ballColor;
-@property BOOL selected;
-@property (nonatomic,weak) CALayer *radarLayer;
-@property CGPoint ballPosition;
 @property (nonatomic,strong) NSString *identifier;
+-(CALayer*) eventBallLayer;
 
 -(instancetype) initWithColor:(UIColor*)color
                   andPosition:(CGPoint)pos
                      andIdent:(NSString*)identity;
 
--(CALayer*) eventBallLayer;
+// change attributes, modify our layer
+-(void) changeEventPosition:(CGPoint)pt;
+-(void) changeEventColor:(UIColor*)color;
+
+-(void) makeEventSelected;
+-(void) makeEventUnselected;
 
 @end

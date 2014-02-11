@@ -11,6 +11,10 @@
 @interface EventBall ()
 
 @property (nonatomic,strong) CAShapeLayer *ourLayer;
+@property BOOL selected;
+@property CGPoint ballPosition;
+
+@property (nonatomic,strong) CAShapeLayer *donutLayer;
 
 @end
 
@@ -36,9 +40,28 @@
         self.ballPosition = pos;
         self.selected = NO;
         self.identifier = ident;
+        //[self createDonutLayer];
         
     }
     return self;
+}
+
+#define DONUT_WIDTH 8
+#define OUTER_DONUT_SIZE 24
+
+-(void) createDonutLayer {
+    self.donutLayer = [CAShapeLayer layer];
+    self.donutLayer.bounds = CGRectMake(0, 0, OUTER_DONUT_SIZE, OUTER_DONUT_SIZE);
+    [self.donutLayer setStrokeColor:self.ballColor.CGColor];
+    [self.donutLayer setFillColor:[UIColor clearColor].CGColor];
+    self.donutLayer.position = self.ourLayer.position;
+    self.donutLayer.opacity = 1.0;
+    self.donutLayer.lineWidth = DONUT_WIDTH;
+    CGRect outerRect = self.donutLayer.bounds;
+    UIBezierPath *donutPath = [UIBezierPath bezierPathWithOvalInRect:outerRect];
+    //[donutPath stroke];
+    self.donutLayer.path = donutPath.CGPath;
+    [self.ourLayer addSublayer:self.donutLayer];
 }
 
 -(CALayer*) eventBallLayer {
@@ -47,5 +70,21 @@
     return self.ourLayer;
     
 }
+
+#pragma mark - change event attributes
+-(void) changeEventPosition:(CGPoint)pt {
+    self.ourLayer.position = pt;
+}
+
+-(void) changeEventColor:(UIColor *)color {
+    [self.ourLayer setFillColor:color.CGColor];
+}
+
+-(void) makeEventSelected { }
+-(void) makeEventUnselected {}
+
+
+
+
 
 @end

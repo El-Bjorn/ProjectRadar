@@ -30,12 +30,12 @@
     
     //[self drawDotAtPt:CGPointMake(240, 130) withColor:[UIColor redColor]];
     [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(240,130) andIdent:@"bigJob"];
-    [self createEventWithColor:[UIColor purpleColor] andPosition:CGPointMake(240,130) andIdent:@"bigJob"];
+    //[self createEventWithColor:[UIColor purpleColor] andPosition:CGPointMake(240,130) andIdent:@"bigJob"];
 
     //[self drawDotAtPt:CGPointMake(185, 170) withColor:[UIColor blueColor]];
     [self createEventWithColor:[UIColor blueColor] andPosition:CGPointMake(185,170) andIdent:@"littleJob"];
     
-    [self eventWithIdent:@"bigJob"];
+    //[self eventWithIdent:@"bigJob"];
     
 }
 
@@ -75,7 +75,6 @@
     drawPt.x = self.bounds.size.width-RADAR_GRID_LINE_INSET;
     [linePath addLineToPoint:drawPt];
  
-    //[linePath stroke];
     
     UIBezierPath *linePath2 = [linePath copy];
     CGAffineTransform toOrigin = CGAffineTransformMakeTranslation(-CGRectGetMidX(self.bounds), -(CGRectGetMidY(self.bounds)));
@@ -86,7 +85,6 @@
     [linePath2 applyTransform:lineSpin];
     [linePath2 applyTransform:fromOrigin];
     
-    //[linePath2 stroke];
     [radarGridPath appendPath:linePath];
     [radarGridPath appendPath:linePath2];
     
@@ -207,11 +205,29 @@
     return self.radarEvents[eventIndex];    
 }
 
+-(void) changeStuff {
+    NSLog(@"changing stuff");
+    EventBall *b = [self eventWithIdent:@"bigJob"];
+    [b changeEventPosition:CGPointMake(200, 200)];
+    [b changeEventColor:[UIColor purpleColor]];
+}
+
 
 -(void) drawRect:(CGRect)rect
 {
     [self drawRadarGrid];
     [self displayEvents];
+    
+    double delayInSeconds = 3.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSLog(@"changing stuff");
+        EventBall *b = [self eventWithIdent:@"bigJob"];
+        [b changeEventPosition:CGPointMake(200, 200)];
+        [b changeEventColor:[UIColor purpleColor]];
+
+    });
+    
     
     
     //[self drawDotAtPt:CGPointMake(80, 90) withColor:[UIColor greenColor]];
