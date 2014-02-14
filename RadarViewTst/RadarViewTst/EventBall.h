@@ -12,15 +12,30 @@
 
 @property (nonatomic,strong) UIColor *ballColor;
 @property (nonatomic,strong) NSString *identifier;
+
+// how fast we move within the radar view
+@property float eventSpeed;
+
+
 -(CALayer*) eventBallLayer;
 
 -(instancetype) initWithColor:(UIColor*)color
                   andPosition:(CGPoint)pos
+                     andSpeed:(float)speed
                      andIdent:(NSString*)identity;
 
 // change attributes, modify our layer
+
+// step (at eventSpeed) toward center
+-(void) stepTowardCenter;
+
 -(void) changeEventPosition:(CGPoint)pt;
 -(void) changeEventColor:(UIColor*)color;
+
+// is the tap ours?
+-(BOOL) pointInEvent:(CGPoint)pt;
+
+-(void) toggleSelection;
 
 -(void) makeEventSelected;
 -(void) makeEventUnselected;

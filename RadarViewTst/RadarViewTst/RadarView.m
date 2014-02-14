@@ -28,15 +28,33 @@
     radarGridLineWidth = 1.0;
     self.radarEvents= [[NSMutableArray alloc] init];
     
+    // set up tap recog
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapEvent:)];
+    [self addGestureRecognizer:tap];
+    
     //[self drawDotAtPt:CGPointMake(240, 130) withColor:[UIColor redColor]];
-    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(240,130) andIdent:@"bigJob"];
     //[self createEventWithColor:[UIColor purpleColor] andPosition:CGPointMake(240,130) andIdent:@"bigJob"];
 
     //[self drawDotAtPt:CGPointMake(185, 170) withColor:[UIColor blueColor]];
-    [self createEventWithColor:[UIColor blueColor] andPosition:CGPointMake(185,170) andIdent:@"littleJob"];
+    [self createEventWithColor:[UIColor blueColor]
+                   andPosition:CGPointMake(185,170)
+                      andSpeed:3.0
+                      andIdent:@"littleJob"];
     
     //[self eventWithIdent:@"bigJob"];
+    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(225,130) andSpeed:2 andIdent:@"bigJob1"];
+    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(255,125) andSpeed:2 andIdent:@"bigJob2"];
+    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(285,120) andSpeed:2 andIdent:@"bigJob3"];
+    //[self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(255,145) andIdent:@"bigJob4"];
+
     
+    [self createEventWithColor:[UIColor greenColor] andPosition:CGPointMake(85,70) andSpeed:10 andIdent:@"jobX"];
+    
+    [self createEventWithColor:[UIColor yellowColor] andPosition:CGPointMake(150,190) andSpeed:4 andIdent:@"JobY1"];
+    [self createEventWithColor:[UIColor yellowColor] andPosition:CGPointMake(150,220) andSpeed:4 andIdent:@"littleJY2"];
+    
+    [self createEventWithColor:[UIColor purpleColor] andPosition:CGPointMake(250, 250) andSpeed:6 andIdent:@"mega-job"];
+  
 }
 
 -(id) initWithFrame:(CGRect)frame
@@ -143,7 +161,7 @@
     
 }
 
-#define DONUT_WIDTH 8
+/*#define DONUT_WIDTH 8
 #define OUTER_DONUT_SIZE 24
 
 
@@ -183,10 +201,14 @@
     dotLayer.path = dotPath.CGPath;
     [self.layer addSublayer:dotLayer];
     
-}
+} */
 
--(void) createEventWithColor:(UIColor*)color andPosition:(CGPoint)pt andIdent:(NSString*)ident {
-    EventBall *b = [[EventBall alloc] initWithColor:color andPosition:pt andIdent:ident];
+-(void) createEventWithColor:(UIColor*)color
+                 andPosition:(CGPoint)pt
+                    andSpeed:(float)speed
+                    andIdent:(NSString*)ident {
+    EventBall *b = [[EventBall alloc] initWithColor:color andPosition:pt andSpeed:speed
+                                           andIdent:ident];
     [self.radarEvents addObject:b];
 }
 
@@ -205,12 +227,12 @@
     return self.radarEvents[eventIndex];    
 }
 
--(void) changeStuff {
+/*-(void) changeStuff {
     NSLog(@"changing stuff");
     EventBall *b = [self eventWithIdent:@"bigJob"];
     [b changeEventPosition:CGPointMake(200, 200)];
     [b changeEventColor:[UIColor purpleColor]];
-}
+} */
 
 
 -(void) drawRect:(CGRect)rect
@@ -218,15 +240,19 @@
     [self drawRadarGrid];
     [self displayEvents];
     
-    double delayInSeconds = 3.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+  /*  double delayInSeconds = 3.0;
+    EventBall *b1 = [self eventWithIdent:@"bigJob"];
+    EventBall *b2 = [self eventWithIdent:@"littleJob"]; */
+    //[b1 makeEventSelected];
+   /* dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         NSLog(@"changing stuff");
-        EventBall *b = [self eventWithIdent:@"bigJob"];
-        [b changeEventPosition:CGPointMake(200, 200)];
-        [b changeEventColor:[UIColor purpleColor]];
+        [b2 makeEventSelected];
+        [b1 makeEventUnselected];
+        [b1 changeEventPosition:CGPointMake(200, 200)];
+        [b1 changeEventColor:[UIColor purpleColor]];
 
-    });
+    }); */
     
     
     
@@ -235,6 +261,31 @@
     //EventBall *a = [[EventBall alloc] initWithColor:[UIColor yellowColor] andPosition:CGPointMake(80,140)];
     //ballLayer = [a eventBallLayer];
     //[self.layer addSublayer:ballLayer];
+
+}
+
+-(void) stepTimeForEvents {
+    for (EventBall *b in self.radarEvents) {
+        [b stepTowardCenter];
+    }
+
+}
+
+#pragma mark - tap events
+-(void) tapEvent:(UITapGestureRecognizer*)tap {
+    CGPoint pt = [tap locationInView:self];
+    NSLog(@"caught tap (%.2f,%.2f",pt.x,pt.y);
+    
+    [self setNeedsDisplay];
+    
+    for (EventBall *b in self.radarEvents) {
+        if ([b pointInEvent:pt]) {
+            NSLog(@"tap within event: %@",b.identifier);
+            [b toggleSelection];
+            return;
+        }
+    }
+
 
 }
 

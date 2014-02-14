@@ -8,6 +8,13 @@
 
 #import "EventBall.h"
 
+
+float distance_between_pts(CGPoint p1,CGPoint p2){
+    float dist = sqrtf( ((p1.x-p2.x)*(p1.x-p2.x)) + ((p1.y-p2.y)*(p1.y-p2.y)) );
+    return dist;
+}
+
+
 @interface EventBall ()
 
 @property (nonatomic,strong) CAShapeLayer *ourLayer;
@@ -17,6 +24,10 @@
 @property (nonatomic,strong) CAShapeLayer *donutLayer;
 
 @end
+
+// distance from center for which we will claim it as ours
+#define TOUCH_RANGE 10.0
+
 
 #define DOT_SIZE 10
 #define DONUT_WIDTH 8
@@ -29,6 +40,7 @@
 
 -(instancetype) initWithColor:(UIColor *)color
                   andPosition:(CGPoint)pos
+                    andSpeed:(float)speed
                      andIdent:(NSString *)ident{
     self = [super init];
     if (self) {
@@ -52,6 +64,7 @@
         self.ballPosition = pos;
         self.selected = NO;
         self.identifier = ident;
+        self.eventSpeed = speed;
         [self createDonutLayer];
         //self.ourLayer.position = pos;
         
@@ -78,7 +91,7 @@
     //donutPath.lineWidth = DONUT_WIDTH;
     //[donutPath stroke];
     self.donutLayer.path = donutPath.CGPath;
-    [self.ourLayer addSublayer:self.donutLayer];
+    //[self.ourLayer addSublayer:self.donutLayer];
 }
 
 -(CALayer*) eventBallLayer {
@@ -88,7 +101,58 @@
     
 }
 
+
+-(BOOL) pointInEvent:(CGPoint)pt {
+    CGPoint ourCenter = self.ourLayer.position;
+    float dist = distance_between_pts(ourCenter, pt);
+    if (dist < TOUCH_RANGE) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+
 #pragma mark - change event attributes
+
+-(void) stepTowardCenter {
+    float xdist,xspeed;
+    float ydist,yspeed;
+    float total_dist;
+    
+    CGPoint position = self.ourLayer.position;
+    float num_steps;
+    // for the moment, we know the center is 150,150
+    CGPoint center = {150.0,150.0};
+    total_dist = distance_between_pts(center, position);
+    num_steps = total_dist/self.eventSpeed;
+    // see if we're home
+    if (total_dist < 6) {
+        return;
+    }
+    xdist = center.x - position.x;
+    xspeed = xdist/num_steps;
+    
+    ydist = center.y - position.y;
+    yspeed = ydist/num_steps;
+    
+    position.x += xspeed;
+    position.y += yspeed;
+    
+    self.ourLayer.position = position;
+    
+    
+}
+
+-(void) toggleSelection {
+    if (self.selected) {
+        [self makeEventUnselected];
+    } else {
+        [self makeEventSelected];
+    }
+}
+
+
 -(void) changeEventPosition:(CGPoint)pt {
     self.ourLayer.position = pt;
 }
@@ -97,8 +161,18 @@
     [self.ourLayer setFillColor:color.CGColor];
 }
 
--(void) makeEventSelected { }
--(void) makeEventUnselected {}
+-(void) makeEventSelected {
+    if (self.selected == NO){
+        [self.ourLayer addSublayer:self.donutLayer];
+    }
+    self.selected = YES;
+}
+-(void) makeEventUnselected {
+    if (self.selected == YES) {
+        [self.donutLayer removeFromSuperlayer];
+    }
+    self.selected = NO;
+}
 
 
 

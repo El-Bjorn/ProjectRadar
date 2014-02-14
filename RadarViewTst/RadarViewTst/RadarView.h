@@ -12,4 +12,6 @@
 
 @interface RadarView : UIView
 
+-(void) stepTimeForEvents;
+
 @end

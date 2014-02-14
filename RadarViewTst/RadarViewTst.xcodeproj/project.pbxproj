@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4077FA1A18A1B92A005B9A5F /* EventBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 4077FA1918A1B92A005B9A5F /* EventBall.m */; };
+		4096E5D318AEA52E00187643 /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4096E5D218AEA52E00187643 /* RadarViewController.m */; };
 		409AA40D18976E9900DA9755 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409AA40C18976E9900DA9755 /* Foundation.framework */; };
 		409AA40F18976E9900DA9755 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409AA40E18976E9900DA9755 /* CoreGraphics.framework */; };
 		409AA41118976E9900DA9755 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 409AA41018976E9900DA9755 /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		4077FA1818A1B92A005B9A5F /* EventBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventBall.h; sourceTree = "<group>"; };
 		4077FA1918A1B92A005B9A5F /* EventBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventBall.m; sourceTree = "<group>"; };
+		4096E5D118AEA52E00187643 /* RadarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadarViewController.h; sourceTree = "<group>"; };
+		4096E5D218AEA52E00187643 /* RadarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadarViewController.m; sourceTree = "<group>"; };
 		409AA40918976E9900DA9755 /* RadarViewTst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadarViewTst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		409AA40C18976E9900DA9755 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		409AA40E18976E9900DA9755 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,6 +132,8 @@
 				4077FA1818A1B92A005B9A5F /* EventBall.h */,
 				4077FA1918A1B92A005B9A5F /* EventBall.m */,
 				409AA41318976E9900DA9755 /* Supporting Files */,
+				4096E5D118AEA52E00187643 /* RadarViewController.h */,
+				4096E5D218AEA52E00187643 /* RadarViewController.m */,
 			);
 			path = RadarViewTst;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 				4077FA1A18A1B92A005B9A5F /* EventBall.m in Sources */,
 				409AA41918976E9900DA9755 /* main.m in Sources */,
 				409AA44318976FB900DA9755 /* RadarView.m in Sources */,
+				4096E5D318AEA52E00187643 /* RadarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
