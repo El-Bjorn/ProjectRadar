@@ -14,4 +14,6 @@
 
 -(void) stepTimeForEvents;
 
+-(void) resetEvents;
+
 @end

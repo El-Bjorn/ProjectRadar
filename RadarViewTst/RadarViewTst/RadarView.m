@@ -31,29 +31,12 @@
     // set up tap recog
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapEvent:)];
     [self addGestureRecognizer:tap];
+    [self generateEvents];
     
     //[self drawDotAtPt:CGPointMake(240, 130) withColor:[UIColor redColor]];
     //[self createEventWithColor:[UIColor purpleColor] andPosition:CGPointMake(240,130) andIdent:@"bigJob"];
 
     //[self drawDotAtPt:CGPointMake(185, 170) withColor:[UIColor blueColor]];
-    [self createEventWithColor:[UIColor blueColor]
-                   andPosition:CGPointMake(185,170)
-                      andSpeed:3.0
-                      andIdent:@"littleJob"];
-    
-    //[self eventWithIdent:@"bigJob"];
-    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(225,130) andSpeed:2 andIdent:@"bigJob1"];
-    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(255,125) andSpeed:2 andIdent:@"bigJob2"];
-    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(285,120) andSpeed:2 andIdent:@"bigJob3"];
-    //[self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(255,145) andIdent:@"bigJob4"];
-
-    
-    [self createEventWithColor:[UIColor greenColor] andPosition:CGPointMake(85,70) andSpeed:10 andIdent:@"jobX"];
-    
-    [self createEventWithColor:[UIColor yellowColor] andPosition:CGPointMake(150,190) andSpeed:4 andIdent:@"JobY1"];
-    [self createEventWithColor:[UIColor yellowColor] andPosition:CGPointMake(150,220) andSpeed:4 andIdent:@"littleJY2"];
-    
-    [self createEventWithColor:[UIColor purpleColor] andPosition:CGPointMake(250, 250) andSpeed:6 andIdent:@"mega-job"];
   
 }
 
@@ -74,6 +57,39 @@
         [self sharedInit];
     }
     return self;
+}
+
+-(void) resetEvents {
+    for (EventBall *b in self.radarEvents) {
+        [b removeEvent];
+     }
+    [self.radarEvents removeAllObjects];
+    //[self generateEvents];
+    //[self sharedInit];
+    [self generateEvents];
+    [self setNeedsDisplay];
+}
+
+-(void) generateEvents {
+    [self createEventWithColor:[UIColor blueColor]
+                   andPosition:CGPointMake(185,170)
+                      andSpeed:3.0
+                      andIdent:@"littleJob"];
+    
+    //[self eventWithIdent:@"bigJob"];
+    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(225,130) andSpeed:2 andIdent:@"bigJob1"];
+    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(255,125) andSpeed:2 andIdent:@"bigJob2"];
+    [self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(285,120) andSpeed:2 andIdent:@"bigJob3"];
+    //[self createEventWithColor:[UIColor redColor] andPosition:CGPointMake(255,145) andIdent:@"bigJob4"];
+    
+    
+    [self createEventWithColor:[UIColor greenColor] andPosition:CGPointMake(85,70) andSpeed:10 andIdent:@"jobX"];
+    
+    [self createEventWithColor:[UIColor yellowColor] andPosition:CGPointMake(150,190) andSpeed:4 andIdent:@"JobY1"];
+    [self createEventWithColor:[UIColor yellowColor] andPosition:CGPointMake(150,220) andSpeed:4 andIdent:@"littleJY2"];
+    
+    [self createEventWithColor:[UIColor purpleColor] andPosition:CGPointMake(250, 250) andSpeed:6 andIdent:@"mega-job"];
+
 }
 
 #define RADAR_GRID_LINE_INSET 5.0

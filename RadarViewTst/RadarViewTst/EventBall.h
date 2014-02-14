@@ -24,7 +24,8 @@
                      andSpeed:(float)speed
                      andIdent:(NSString*)identity;
 
-// change attributes, modify our layer
+
+-(void) removeEvent;
 
 // step (at eventSpeed) toward center
 -(void) stepTowardCenter;

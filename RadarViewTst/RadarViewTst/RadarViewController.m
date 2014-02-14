@@ -38,4 +38,7 @@
 - (IBAction)stepTimeButton:(id)sender {
     [self.radarViewScreen stepTimeForEvents];
 }
+- (IBAction)resetRadarScreen:(id)sender {
+    [self.radarViewScreen resetEvents];
+}
 @end

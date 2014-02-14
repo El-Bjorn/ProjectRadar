@@ -152,6 +152,10 @@ float distance_between_pts(CGPoint p1,CGPoint p2){
     }
 }
 
+-(void) removeEvent {
+    [self.ourLayer removeFromSuperlayer];
+}
+
 
 -(void) changeEventPosition:(CGPoint)pt {
     self.ourLayer.position = pt;

@@ -12,5 +12,6 @@
 @interface RadarViewController : UIViewController
 - (IBAction)stepTimeButton:(id)sender;
 @property (weak, nonatomic) IBOutlet RadarView *radarViewScreen;
+- (IBAction)resetRadarScreen:(id)sender;
 
 @end
