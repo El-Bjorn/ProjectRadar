@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1514" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Deliverable" representedClassName="Deliverable" syncable="YES">
+        <attribute name="detailDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dueDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="hoursToComplete" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="parentProj" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="deliverables" inverseEntity="Project" syncable="YES"/>
+    </entity>
+    <entity name="Project" representedClassName="Project" syncable="YES">
+        <attribute name="projColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="projDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trajectRadian" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="deliverables" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Deliverable" inverseName="parentProj" inverseEntity="Deliverable" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Deliverable" positionX="-308" positionY="-18" width="128" height="118"/>
+        <element name="Project" positionX="-54" positionY="18" width="128" height="118"/>
+    </elements>
+</model>
