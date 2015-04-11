@@ -19,6 +19,8 @@
 		405622701AD8A1C700838108 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 4056226E1AD8A1C700838108 /* Project.m */; };
 		405622731AD8A1C800838108 /* Deliverable.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622721AD8A1C800838108 /* Deliverable.m */; };
 		405622741AD8A1C800838108 /* Deliverable.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622721AD8A1C800838108 /* Deliverable.m */; };
+		405622791AD8AC6800838108 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622781AD8AC6800838108 /* ProjectManager.m */; };
+		4056227A1AD8AC6800838108 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622781AD8AC6800838108 /* ProjectManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		4056226E1AD8A1C700838108 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Project.m; path = ../Project.m; sourceTree = "<group>"; };
 		405622711AD8A1C800838108 /* Deliverable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deliverable.h; path = ../Deliverable.h; sourceTree = "<group>"; };
 		405622721AD8A1C800838108 /* Deliverable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Deliverable.m; path = ../Deliverable.m; sourceTree = "<group>"; };
+		405622771AD8AC6800838108 /* ProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectManager.h; sourceTree = "<group>"; };
+		405622781AD8AC6800838108 /* ProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,11 +137,7 @@
 		4056226C1AD8A18700838108 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				4056224A1AD89FCF00838108 /* ProjectRadar.xcdatamodeld */,
-				405622711AD8A1C800838108 /* Deliverable.h */,
-				405622721AD8A1C800838108 /* Deliverable.m */,
-				4056226D1AD8A1C700838108 /* Project.h */,
-				4056226E1AD8A1C700838108 /* Project.m */,
+				4056227B1AD8AC7100838108 /* core data */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -156,6 +156,20 @@
 			children = (
 			);
 			name = "project view";
+			sourceTree = "<group>";
+		};
+		4056227B1AD8AC7100838108 /* core data */ = {
+			isa = PBXGroup;
+			children = (
+				405622771AD8AC6800838108 /* ProjectManager.h */,
+				405622781AD8AC6800838108 /* ProjectManager.m */,
+				4056224A1AD89FCF00838108 /* ProjectRadar.xcdatamodeld */,
+				405622711AD8A1C800838108 /* Deliverable.h */,
+				405622721AD8A1C800838108 /* Deliverable.m */,
+				4056226D1AD8A1C700838108 /* Project.h */,
+				4056226E1AD8A1C700838108 /* Project.m */,
+			);
+			name = "core data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +275,7 @@
 				405622491AD89FCF00838108 /* AppDelegate.m in Sources */,
 				4056224C1AD89FCF00838108 /* ProjectRadar.xcdatamodeld in Sources */,
 				4056224F1AD89FCF00838108 /* ViewController.m in Sources */,
+				405622791AD8AC6800838108 /* ProjectManager.m in Sources */,
 				405622731AD8A1C800838108 /* Deliverable.m in Sources */,
 				4056226F1AD8A1C700838108 /* Project.m in Sources */,
 				405622461AD89FCF00838108 /* main.m in Sources */,
@@ -272,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				405622741AD8A1C800838108 /* Deliverable.m in Sources */,
+				4056227A1AD8AC6800838108 /* ProjectManager.m in Sources */,
 				405622631AD89FD000838108 /* ProjectRadarTests.m in Sources */,
 				405622701AD8A1C700838108 /* Project.m in Sources */,
 			);
