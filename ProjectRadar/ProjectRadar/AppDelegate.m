@@ -18,6 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    ProjectManager *pm = [ProjectManager sharedInstance];
+    NSLog(@"pm.managedObjectContext= %@",pm.managedObjectContext);
     return YES;
 }
 

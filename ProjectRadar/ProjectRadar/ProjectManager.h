@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "Deliverable.h"
+#import "Project.h"
 
 #define PROJ_ENTITY @"Project"
 #define DELIV_ENTITY @"Deliverable"
@@ -20,7 +22,7 @@
 - (void)saveContext;
 +(instancetype) sharedInstance;
 
--(void) addProjectWithName:(NSString*)name
+-(Project*) addProjectWithName:(NSString*)name
                    andDesc:(NSString*)desc
                   andColor:(UIColor*)color
                 andTraject:(double)traject;
@@ -28,13 +30,14 @@
 -(void) addDeliverableWithTitle:(NSString*)title
                         andDesc:(NSString*)desc
                      andDueDate:(NSDate*)date
-                   andHrsToComp:(double)hours;
+                   andHrsToComp:(double)hours
+                      toProject:(Project*)proj;
 
 -(NSArray*) allProjects;
 
 -(NSArray*) allDeliverables;
 
--(NSArray*) allDeliverablesFromProj:(NSString*)proj;
+-(NSArray*) allDeliverablesFromProj:(Project*)proj;
 
 
 @end

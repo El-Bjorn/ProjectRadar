@@ -45,7 +45,7 @@ static ProjectManager *ourSharedInstance = nil;
 
 #pragma mark - model manipulation
 
--(void) addProjectWithName:(NSString*)name
+-(Project*) addProjectWithName:(NSString*)name
                    andDesc:(NSString*)desc
                   andColor:(UIColor*)color
                 andTraject:(double)traject
@@ -56,14 +56,16 @@ static ProjectManager *ourSharedInstance = nil;
     proj.projDesc = desc;
     proj.projColor = color;
     proj.trajectRadian = @(traject);
-    
     [self saveContext];
+    
+    return proj;
 }
 
 -(void) addDeliverableWithTitle:(NSString*)title
                         andDesc:(NSString*)desc
                      andDueDate:(NSDate*)date
                    andHrsToComp:(double)hours
+                    toProject:(Project *)proj
 {
     Deliverable *deliv = [NSEntityDescription insertNewObjectForEntityForName:DELIV_ENTITY
                                                        inManagedObjectContext:self.managedObjectContext];
@@ -71,6 +73,7 @@ static ProjectManager *ourSharedInstance = nil;
     deliv.detailDesc = desc;
     deliv.dueDate = date;
     deliv.hoursToComplete = @(hours);
+    deliv.parentProj = proj;
     
     [self saveContext];
     
@@ -86,7 +89,6 @@ static ProjectManager *ourSharedInstance = nil;
     if (err) {
         NSLog(@"project fetch failed: %@",err);
     }
-    
     return projs;
 }
 
@@ -98,20 +100,19 @@ static ProjectManager *ourSharedInstance = nil;
     if (err) {
         NSLog(@"deliverable fetch failed: %@",err);
     }
-    
     return delivs;
 }
 
--(NSArray*) allDeliverablesFromProj:(NSString *)proj {
+-(NSArray*) allDeliverablesFromProj:(Project*)proj {
     NSError *err = nil;
     NSArray *delivs = nil;
     NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:DELIV_ENTITY];
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@""];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"parentProj= %@",proj];
+    fetch.predicate = pred;
     delivs = [self.managedObjectContext executeFetchRequest:fetch error:&err];
     if (err) {
         NSLog(@"deliverable fetch failed: %@",err);
     }
-    
     return delivs;
 }
 

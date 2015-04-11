@@ -472,6 +472,7 @@
 				405622681AD89FD000838108 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		405622691AD89FD000838108 /* Build configuration list for PBXNativeTarget "ProjectRadarTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +481,7 @@
 				4056226B1AD89FD000838108 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
