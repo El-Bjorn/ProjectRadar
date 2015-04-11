@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Builtlight. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+
+#define PROJ_ENTITY @"Project"
+#define DELIV_ENTITY @"Deliverable"
 
 
 @interface ProjectManager : NSObject
@@ -15,9 +18,23 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 - (void)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
 +(instancetype) sharedInstance;
 
+-(void) addProjectWithName:(NSString*)name
+                   andDesc:(NSString*)desc
+                  andColor:(UIColor*)color
+                andTraject:(double)traject;
+
+-(void) addDeliverableWithTitle:(NSString*)title
+                        andDesc:(NSString*)desc
+                     andDueDate:(NSDate*)date
+                   andHrsToComp:(double)hours;
+
+-(NSArray*) allProjects;
+
+-(NSArray*) allDeliverables;
+
+-(NSArray*) allDeliverablesFromProj:(NSString*)proj;
 
 
 @end

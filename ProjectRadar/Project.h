@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Builtlight. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
 
@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSString * projName;
 @property (nonatomic, retain) NSString * projDesc;
 @property (nonatomic, retain) NSNumber * trajectRadian;
-@property (nonatomic, retain) id projColor;
+@property (nonatomic, retain) UIColor *projColor;
 @property (nonatomic, retain) NSSet *deliverables;
 @end
 

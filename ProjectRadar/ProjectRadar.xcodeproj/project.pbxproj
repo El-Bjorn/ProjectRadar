@@ -137,6 +137,8 @@
 		4056226C1AD8A18700838108 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				405622771AD8AC6800838108 /* ProjectManager.h */,
+				405622781AD8AC6800838108 /* ProjectManager.m */,
 				4056227B1AD8AC7100838108 /* core data */,
 			);
 			name = model;
@@ -161,8 +163,6 @@
 		4056227B1AD8AC7100838108 /* core data */ = {
 			isa = PBXGroup;
 			children = (
-				405622771AD8AC6800838108 /* ProjectManager.h */,
-				405622781AD8AC6800838108 /* ProjectManager.m */,
 				4056224A1AD89FCF00838108 /* ProjectRadar.xcdatamodeld */,
 				405622711AD8A1C800838108 /* Deliverable.h */,
 				405622721AD8A1C800838108 /* Deliverable.m */,

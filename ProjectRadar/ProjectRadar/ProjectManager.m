@@ -7,6 +7,8 @@
 //
 
 #import "ProjectManager.h"
+#import "Project.h"
+#import "Deliverable.h"
 
 static ProjectManager *ourSharedInstance = nil;
 
@@ -21,6 +23,7 @@ static ProjectManager *ourSharedInstance = nil;
 -(instancetype) init {
     self = [super init];
     if (self) {
+        NSLog(@"initializing ProjectManager");
         
     }
     return self;
@@ -32,13 +35,88 @@ static ProjectManager *ourSharedInstance = nil;
         dispatch_once(&once, ^{
             ourSharedInstance = [[ProjectManager alloc] init];
         });
-        if (ourSharedInstance) {
+        if (ourSharedInstance == nil) {
             NSLog(@"Can't create share instance...bailing...");
             assert(0);
         }
     }
     return ourSharedInstance;
 }
+
+#pragma mark - model manipulation
+
+-(void) addProjectWithName:(NSString*)name
+                   andDesc:(NSString*)desc
+                  andColor:(UIColor*)color
+                andTraject:(double)traject
+{
+    Project *proj = [NSEntityDescription insertNewObjectForEntityForName:PROJ_ENTITY
+                                                  inManagedObjectContext:self.managedObjectContext];
+    proj.projName = name;
+    proj.projDesc = desc;
+    proj.projColor = color;
+    proj.trajectRadian = @(traject);
+    
+    [self saveContext];
+}
+
+-(void) addDeliverableWithTitle:(NSString*)title
+                        andDesc:(NSString*)desc
+                     andDueDate:(NSDate*)date
+                   andHrsToComp:(double)hours
+{
+    Deliverable *deliv = [NSEntityDescription insertNewObjectForEntityForName:DELIV_ENTITY
+                                                       inManagedObjectContext:self.managedObjectContext];
+    deliv.title = title;
+    deliv.detailDesc = desc;
+    deliv.dueDate = date;
+    deliv.hoursToComplete = @(hours);
+    
+    [self saveContext];
+    
+}
+
+#pragma mark - Reading the Model
+
+-(NSArray*) allProjects {
+    NSError *err = nil;
+    NSArray *projs = nil;
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:PROJ_ENTITY];
+    projs = [self.managedObjectContext executeFetchRequest:fetch error:&err];
+    if (err) {
+        NSLog(@"project fetch failed: %@",err);
+    }
+    
+    return projs;
+}
+
+-(NSArray*) allDeliverables {
+    NSError *err = nil;
+    NSArray *delivs = nil;
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:DELIV_ENTITY];
+    delivs = [self.managedObjectContext executeFetchRequest:fetch error:&err];
+    if (err) {
+        NSLog(@"deliverable fetch failed: %@",err);
+    }
+    
+    return delivs;
+}
+
+-(NSArray*) allDeliverablesFromProj:(NSString *)proj {
+    NSError *err = nil;
+    NSArray *delivs = nil;
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:DELIV_ENTITY];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@""];
+    delivs = [self.managedObjectContext executeFetchRequest:fetch error:&err];
+    if (err) {
+        NSLog(@"deliverable fetch failed: %@",err);
+    }
+    
+    return delivs;
+}
+
+
+
 
 #pragma mark - Core Data stack
 
