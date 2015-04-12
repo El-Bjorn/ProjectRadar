@@ -18,22 +18,22 @@
 
 - (void)setUp {
     [super setUp];
-    /*ProjectManager *pm = [ProjectManager sharedInstance];
+   /* ProjectManager *pm = [ProjectManager sharedInstance];
     Project *p1 = [pm addProjectWithName:@"proj1"
                    andDesc:@"first project"
                   andColor:[UIColor redColor]
-                andTraject:1.5];
+                andTraject:M_PI_4];
     
     Project *p2 = [pm addProjectWithName:@"proj2"
                    andDesc:@"second project"
                   andColor:[UIColor blueColor]
-                andTraject:5.5];
+                andTraject:M_PI];
     
     [pm addDeliverableWithTitle:@"d1" andDesc:@"first deliv"
-                     andDueDate:[NSDate date] andHrsToComp:15.2 toProject:p1];
+                     andDueDate:[[NSDate date] dateByAddingTimeInterval:40000] andHrsToComp:10.2 toProject:p1];
     
     [pm addDeliverableWithTitle:@"d2" andDesc:@"second deliv"
-                     andDueDate:[NSDate date] andHrsToComp:15.2 toProject:p2]; */
+                     andDueDate:[[NSDate date] dateByAddingTimeInterval:86000] andHrsToComp:5.2 toProject:p2]; */
 
 }
 

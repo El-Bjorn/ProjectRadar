@@ -230,12 +230,14 @@ static ProjectManager *ourSharedInstance = nil;
     // scaled distance in radar rings (this is our hypotenuse)
     double scaled_due_dist = due_date_dist * scale;
     printf("scaled distance: %lf\n", scaled_due_dist);
+    double traject = [self.parentProj.trajectRadian doubleValue];
+    printf("trajectory in degrees: %lf\n",(360*traject)/(2*M_PI));
     // adjacent
-    double x_pos = cos([self.parentProj.trajectRadian doubleValue])*scaled_due_dist;
-    printf("x pos: %lf\n",x_pos);
-    // opposite
-    double y_pos = sin([self.parentProj.trajectRadian doubleValue])*scaled_due_dist;
+    double y_pos = -(cos([self.parentProj.trajectRadian doubleValue])*scaled_due_dist);
     printf("y pos: %lf\n",y_pos);
+    // opposite
+    double x_pos = sin([self.parentProj.trajectRadian doubleValue])*scaled_due_dist;
+    printf("x pos: %lf\n",x_pos);
     
     CGPoint pt = CGPointMake(x_pos, y_pos);
     
