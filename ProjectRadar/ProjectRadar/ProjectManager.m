@@ -7,8 +7,8 @@
 //
 
 #import "ProjectManager.h"
-#import "Project.h"
-#import "Deliverable.h"
+#import "Project+Additions.h"
+#import "Deliverable+Additions.h"
 
 static ProjectManager *ourSharedInstance = nil;
 
@@ -201,3 +201,51 @@ static ProjectManager *ourSharedInstance = nil;
 
 
 @end
+
+#pragma mark - Project additions
+
+
+@implementation Project (Additions)
+
+@end
+
+#pragma mark - Deliverable additions
+
+@implementation Deliverable (Additions)
+
+-(void) addToProject:(Project*)proj {
+    
+}
+-(void) removeFromProject:(Project*)proj {
+    
+}
+
+#define SECS_PER_DAY (24*60*60)
+
+// scale is rings/day
+-(CGPoint) coordsForScale:(double)scale {
+    double secs_til_due_date = [self.dueDate timeIntervalSinceDate:[NSDate date]];
+    // in days
+    double due_date_dist = secs_til_due_date / SECS_PER_DAY;
+    // scaled distance in radar rings (this is our hypotenuse)
+    double scaled_due_dist = due_date_dist * scale;
+    printf("scaled distance: %lf\n", scaled_due_dist);
+    // adjacent
+    double x_pos = cos([self.parentProj.trajectRadian doubleValue])*scaled_due_dist;
+    printf("x pos: %lf\n",x_pos);
+    // opposite
+    double y_pos = sin([self.parentProj.trajectRadian doubleValue])*scaled_due_dist;
+    printf("y pos: %lf\n",y_pos);
+    
+    CGPoint pt = CGPointMake(x_pos, y_pos);
+    
+    return pt;
+}
+
+
+
+@end
+
+
+
+

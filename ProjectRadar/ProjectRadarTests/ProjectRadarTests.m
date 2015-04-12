@@ -37,12 +37,28 @@
 
 }
 
+-(void) testAddDeliverable {
+    ProjectManager *pm = [ProjectManager sharedInstance];
+    NSArray *allProjs = [pm allProjects];
+    Project *p = allProjs[0];
+    
+}
+
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testBasics {
+-(void) testCoords {
+    ProjectManager *pm = [ProjectManager sharedInstance];
+    NSArray *delivs = [pm allDeliverables];
+    for (Deliverable *d in delivs) {
+        NSLog(@"Coords for deliverable: %@",d);
+        [d coordsForScale:1.0];
+    }
+}
+
+-(void) testBasics {
     ProjectManager *pm = [ProjectManager sharedInstance];
     NSLog(@"all projects: %@",[pm allProjects]);
     NSLog(@"all deliverable: %@",[pm allDeliverables]);

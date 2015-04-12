@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "Deliverable.h"
-#import "Project.h"
+#import "Deliverable+Additions.h"
+#import "Project+Additions.h"
 
 #define PROJ_ENTITY @"Project"
 #define DELIV_ENTITY @"Deliverable"
