@@ -12,7 +12,7 @@
 
 @interface Deliverable (Additions)
 
--(CALayer*) ballForDelivWithScale:(double)scale;
+-(CALayer*) ballWithScale:(double)scale;
 
 
 // used to generate deliverable dot

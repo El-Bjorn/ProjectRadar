@@ -236,9 +236,22 @@ static ProjectManager *ourSharedInstance = nil;
 
 
 /* generates a ball of the proper size and color
- *  suitable for display in the radarview */
--(CALayer*) ballForDelivWithScale:(double)scale {
-    return nil;
+ *  suitable for display in the radarview 
+ * re. scale: at 1x, 1pt = 1hr
+ */
+-(CALayer*) ballWithScale:(double)scale {
+    CAShapeLayer *ballLayer = [CAShapeLayer layer];
+    CGFloat ballSize = [self.hoursToComplete doubleValue] * scale;
+    ballLayer.bounds = CGRectMake(0, 0, ballSize, ballSize);
+    ballLayer.opacity = 1.0;
+    ballLayer.position = [self coordsForScale:scale];
+    UIBezierPath *ballPath = [UIBezierPath bezierPathWithOvalInRect:ballLayer.bounds];
+    ballPath.lineWidth = 1.0;
+    ballLayer.path = ballPath.CGPath;
+    ballLayer.strokeColor = self.parentProj.projColor.CGColor;
+    ballLayer.fillColor = self.parentProj.projColor.CGColor;
+    
+    return ballLayer;
 }
 
 #define SECS_PER_DAY (24*60*60)

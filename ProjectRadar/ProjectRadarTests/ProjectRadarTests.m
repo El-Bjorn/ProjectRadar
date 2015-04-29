@@ -18,7 +18,8 @@
 
 - (void)setUp {
     [super setUp];
-   /* ProjectManager *pm = [ProjectManager sharedInstance];
+     /*
+    ProjectManager *pm = [ProjectManager sharedInstance];
     Project *p1 = [pm addProjectWithName:@"proj1"
                    andDesc:@"first project"
                   andColor:[UIColor redColor]
@@ -33,8 +34,17 @@
                      andDueDate:[[NSDate date] dateByAddingTimeInterval:40000] andHrsToComp:10.2 toProject:p1];
     
     [pm addDeliverableWithTitle:@"d2" andDesc:@"second deliv"
-                     andDueDate:[[NSDate date] dateByAddingTimeInterval:86000] andHrsToComp:5.2 toProject:p2]; */
+                     andDueDate:[[NSDate date] dateByAddingTimeInterval:86000] andHrsToComp:5.2 toProject:p2];
+    */
 
+}
+
+-(void) testDelivBallLayers {
+    ProjectManager *pm = [ProjectManager sharedInstance];
+    NSArray *delivs = [pm allDeliverables];
+    for (Deliverable *d in delivs) {
+        NSLog(@"layer for deliverable: %@",[d ballWithScale:1.0]);
+    }
 }
 
 -(void) testDegreesRadians {
