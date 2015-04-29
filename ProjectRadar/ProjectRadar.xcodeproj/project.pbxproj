@@ -21,6 +21,7 @@
 		405622741AD8A1C800838108 /* Deliverable.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622721AD8A1C800838108 /* Deliverable.m */; };
 		405622791AD8AC6800838108 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622781AD8AC6800838108 /* ProjectManager.m */; };
 		4056227A1AD8AC6800838108 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622781AD8AC6800838108 /* ProjectManager.m */; };
+		40B0030D1AF09A5B00A62753 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B0030C1AF09A5B00A62753 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		405622781AD8AC6800838108 /* ProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectManager.m; sourceTree = "<group>"; };
 		4056227D1AD9BA6300838108 /* Deliverable+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Deliverable+Additions.h"; sourceTree = "<group>"; };
 		4056227E1AD9BA8400838108 /* Project+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project+Additions.h"; sourceTree = "<group>"; };
+		40B0030C1AF09A5B00A62753 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B0030D1AF09A5B00A62753 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,7 @@
 		405622371AD89FCF00838108 = {
 			isa = PBXGroup;
 			children = (
+				40B0030C1AF09A5B00A62753 /* CoreGraphics.framework */,
 				405622421AD89FCF00838108 /* ProjectRadar */,
 				4056225F1AD89FD000838108 /* ProjectRadarTests */,
 				405622411AD89FCF00838108 /* Products */,

@@ -37,12 +37,20 @@
 
 }
 
--(void) testAddDeliverable {
+-(void) testDegreesRadians {
+    float degrees = 45.0;
+    float radians = 2.5;
+    
+    printf("%f degrees = %f radians\n",degrees,RADIANS(degrees));
+    printf("%f radians = %f degrees\n",radians,DEGREES(radians));
+}
+
+/*-(void) testAddDeliverable {
     ProjectManager *pm = [ProjectManager sharedInstance];
     NSArray *allProjs = [pm allProjects];
     Project *p = allProjs[0];
     
-}
+} */
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.

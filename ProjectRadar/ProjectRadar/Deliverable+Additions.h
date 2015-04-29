@@ -6,14 +6,16 @@
 //  Copyright (c) 2015 Builtlight. All rights reserved.
 //
 #import "Deliverable.h"
+#import <UIKit/UIKit.h>
 
 @class Project;
 
 @interface Deliverable (Additions)
 
--(void) addToProject:(Project*)proj;
--(void) removeFromProject:(Project*)proj;
+-(CALayer*) ballForDelivWithScale:(double)scale;
 
+
+// used to generate deliverable dot
 -(CGPoint) coordsForScale:(double)scale;
 
 @end

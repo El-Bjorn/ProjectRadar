@@ -17,6 +17,10 @@
 
 @interface ProjectManager : NSObject
 
+// macros for converting degrees <-> radians
+#define DEGREES(R)  ((R*180.0)/M_PI)
+#define RADIANS(D)  ((D*M_PI)/180.0)
+
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 - (void)saveContext;
@@ -27,11 +31,15 @@
                   andColor:(UIColor*)color
                 andTraject:(double)traject;
 
--(void) addDeliverableWithTitle:(NSString*)title
+-(void) deleteProject:(Project*)proj;
+
+-(Deliverable*) addDeliverableWithTitle:(NSString*)title
                         andDesc:(NSString*)desc
                      andDueDate:(NSDate*)date
                    andHrsToComp:(double)hours
                       toProject:(Project*)proj;
+
+-(void) deleteDeliverable:(Deliverable*)deliv;
 
 -(NSArray*) allProjects;
 

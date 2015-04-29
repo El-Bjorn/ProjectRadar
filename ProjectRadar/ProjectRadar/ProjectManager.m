@@ -43,7 +43,7 @@ static ProjectManager *ourSharedInstance = nil;
     return ourSharedInstance;
 }
 
-#pragma mark - model manipulation
+#pragma mark - model manipulation (Projects)
 
 -(Project*) addProjectWithName:(NSString*)name
                    andDesc:(NSString*)desc
@@ -61,7 +61,21 @@ static ProjectManager *ourSharedInstance = nil;
     return proj;
 }
 
--(void) addDeliverableWithTitle:(NSString*)title
+-(void) deleteProject:(Project *)proj {
+    // delete all the deliverables
+    NSArray *delivs = [self allDeliverablesFromProj:proj];
+    for (Deliverable *d in delivs) {
+        [self.managedObjectContext deleteObject:d];
+    }
+    // delete the project
+    [self.managedObjectContext deleteObject:proj];
+    [self saveContext];
+    
+}
+
+#pragma mark - model manipulation (Deliverables)
+
+-(Deliverable*) addDeliverableWithTitle:(NSString*)title
                         andDesc:(NSString*)desc
                      andDueDate:(NSDate*)date
                    andHrsToComp:(double)hours
@@ -77,7 +91,14 @@ static ProjectManager *ourSharedInstance = nil;
     
     [self saveContext];
     
+    return deliv;
 }
+
+-(void) deleteDeliverable:(Deliverable *)deliv {
+    [self.managedObjectContext deleteObject:deliv];
+    [self saveContext];
+}
+
 
 #pragma mark - Reading the Model
 
@@ -213,11 +234,11 @@ static ProjectManager *ourSharedInstance = nil;
 
 @implementation Deliverable (Additions)
 
--(void) addToProject:(Project*)proj {
-    
-}
--(void) removeFromProject:(Project*)proj {
-    
+
+/* generates a ball of the proper size and color
+ *  suitable for display in the radarview */
+-(CALayer*) ballForDelivWithScale:(double)scale {
+    return nil;
 }
 
 #define SECS_PER_DAY (24*60*60)
