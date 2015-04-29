@@ -10,7 +10,7 @@
 		405622461AD89FCF00838108 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622451AD89FCF00838108 /* main.m */; };
 		405622491AD89FCF00838108 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622481AD89FCF00838108 /* AppDelegate.m */; };
 		4056224C1AD89FCF00838108 /* ProjectRadar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4056224A1AD89FCF00838108 /* ProjectRadar.xcdatamodeld */; };
-		4056224F1AD89FCF00838108 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4056224E1AD89FCF00838108 /* ViewController.m */; };
+		4056224F1AD89FCF00838108 /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4056224E1AD89FCF00838108 /* RadarViewController.m */; };
 		405622521AD89FCF00838108 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 405622501AD89FCF00838108 /* Main.storyboard */; };
 		405622541AD89FCF00838108 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 405622531AD89FCF00838108 /* Images.xcassets */; };
 		405622571AD89FCF00838108 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 405622551AD89FCF00838108 /* LaunchScreen.xib */; };
@@ -41,8 +41,8 @@
 		405622471AD89FCF00838108 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		405622481AD89FCF00838108 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4056224B1AD89FCF00838108 /* ProjectRadar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProjectRadar.xcdatamodel; sourceTree = "<group>"; };
-		4056224D1AD89FCF00838108 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4056224E1AD89FCF00838108 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4056224D1AD89FCF00838108 /* RadarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadarViewController.h; sourceTree = "<group>"; };
+		4056224E1AD89FCF00838108 /* RadarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RadarViewController.m; sourceTree = "<group>"; };
 		405622511AD89FCF00838108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		405622531AD89FCF00838108 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		405622561AD89FCF00838108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -153,8 +153,8 @@
 		405622751AD8A1F400838108 /* radar view */ = {
 			isa = PBXGroup;
 			children = (
-				4056224D1AD89FCF00838108 /* ViewController.h */,
-				4056224E1AD89FCF00838108 /* ViewController.m */,
+				4056224D1AD89FCF00838108 /* RadarViewController.h */,
+				4056224E1AD89FCF00838108 /* RadarViewController.m */,
 			);
 			name = "radar view";
 			sourceTree = "<group>";
@@ -282,7 +282,7 @@
 			files = (
 				405622491AD89FCF00838108 /* AppDelegate.m in Sources */,
 				4056224C1AD89FCF00838108 /* ProjectRadar.xcdatamodeld in Sources */,
-				4056224F1AD89FCF00838108 /* ViewController.m in Sources */,
+				4056224F1AD89FCF00838108 /* RadarViewController.m in Sources */,
 				405622791AD8AC6800838108 /* ProjectManager.m in Sources */,
 				405622731AD8A1C800838108 /* Deliverable.m in Sources */,
 				4056226F1AD8A1C700838108 /* Project.m in Sources */,
