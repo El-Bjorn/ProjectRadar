@@ -12,15 +12,14 @@
 
 @interface Deliverable (Additions)
 
-// dep.
--(CALayer*) ballWithScale:(double)scale;
+//-(CALayer*) ballLayerWithScale:(double)scale inRect:(CGRect)rect;
 
--(CALayer*) ballLayerWithScale:(double)scale inRect:(CGRect)rect;
+-(CALayer*) generateBallLayer;
 
-
+-(CALayer*) setBallPositionInRect:(CGRect)rect withScale:(double)scale;
 
 
 // used to generate deliverable dot
--(CGPoint) coordsForScale:(double)scale;
+//-(CGPoint) coordsForScale:(double)scale;
 
 @end

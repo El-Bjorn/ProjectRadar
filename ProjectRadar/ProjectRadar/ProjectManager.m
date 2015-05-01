@@ -88,6 +88,7 @@ static ProjectManager *ourSharedInstance = nil;
     deliv.dueDate = date;
     deliv.hoursToComplete = @(hours);
     deliv.parentProj = proj;
+    [deliv generateBallLayer];
     
     [self saveContext];
     
@@ -234,51 +235,37 @@ static ProjectManager *ourSharedInstance = nil;
 
 @implementation Deliverable (Additions)
 
--(CALayer*) ballLayerWithScale:(double)scale inRect:(CGRect)rect {
-    CAShapeLayer *ballLayer = [CAShapeLayer layer];
-    CGFloat ballSize = [self.hoursToComplete doubleValue] * (50.0/scale);
-    printf("deliv ball size= %lf\n",ballSize);
+#define HOUR_TO_PT_RATIO 1.0
 
+/*  Generated ball layer with correct size and trajectory (in unit square)
+ *   position will be set later  */
+-(CALayer*) generateBallLayer {
+    CAShapeLayer *ballLayer = [CAShapeLayer layer];
+    CGFloat ballSize = [self.hoursToComplete doubleValue] * HOUR_TO_PT_RATIO;
+    printf("deliv ball size= %lf\n",ballSize);
     ballLayer.bounds = CGRectMake(0, 0, ballSize, ballSize);
     ballLayer.opacity = 1.0;
-    // scaled, but not translated
-    CGPoint rawCoords = [self coordsForScale:scale];
-    CGPoint transCoords = CGPointMake(rawCoords.x+(rect.size.width/2.0), rawCoords.y+(rect.size.height/2.0));
-    printf("ball coordinates: (%lf,%lf)\n",transCoords.x,transCoords.y);
-    ballLayer.position = transCoords;
     UIBezierPath *ballPath = [UIBezierPath bezierPathWithOvalInRect:ballLayer.bounds];
     ballPath.lineWidth = 1.0;
     ballLayer.path = ballPath.CGPath;
     ballLayer.strokeColor = self.parentProj.projColor.CGColor;
     ballLayer.fillColor = self.parentProj.projColor.CGColor;
-    
-    return ballLayer;
-}
-
-
-/* generates a ball of the proper size and color
- *  suitable for display in the radarview 
- * re. scale: at 1x, 1pt = 1hr
- */
--(CALayer*) ballWithScale:(double)scale {
-    CAShapeLayer *ballLayer = [CAShapeLayer layer];
-    CGFloat ballSize = [self.hoursToComplete doubleValue] * (1.0/scale);
-    printf("deliv ball size= %lf\n",ballSize);
-    
-    ballLayer.bounds = CGRectMake(0, 0, ballSize, ballSize);
-    ballLayer.opacity = 1.0;
-    //ballLayer.position = [self coordsForScale:scale];
-    ballLayer.position = CGPointMake(100, 100);
-    UIBezierPath *ballPath = [UIBezierPath bezierPathWithOvalInRect:ballLayer.bounds];
-    ballPath.lineWidth = 1.0;
-    ballLayer.path = ballPath.CGPath;
-    ballLayer.strokeColor = self.parentProj.projColor.CGColor;
-    ballLayer.fillColor = self.parentProj.projColor.CGColor;
+    self.ballLayer = ballLayer;
     
     return ballLayer;
 }
 
 #define SECS_PER_DAY (24*60*60)
+
+-(CALayer*) setBallPositionInRect:(CGRect)rect withScale:(double)scale {
+    // scaled, but not translated
+    CGPoint rawCoords = [self coordsForScale:scale];
+    CGPoint transCoords = CGPointMake(rawCoords.x+(rect.size.width/2.0), rawCoords.y+(rect.size.height/2.0));
+    self.ballLayer.position = transCoords;
+    
+    return self.ballLayer;
+}
+
 
 // scale is rings/day
 -(CGPoint) coordsForScale:(double)scale {
@@ -301,6 +288,53 @@ static ProjectManager *ourSharedInstance = nil;
     
     return pt;
 }
+
+/*
+-(CALayer*) ballLayerWithScale:(double)scale inRect:(CGRect)rect {
+    CAShapeLayer *ballLayer = [CAShapeLayer layer];
+    CGFloat ballSize = [self.hoursToComplete doubleValue] * (50.0/scale);
+    printf("deliv ball size= %lf\n",ballSize);
+
+    ballLayer.bounds = CGRectMake(0, 0, ballSize, ballSize);
+    ballLayer.opacity = 1.0;
+    // scaled, but not translated
+    CGPoint rawCoords = [self coordsForScale:scale];
+    CGPoint transCoords = CGPointMake(rawCoords.x+(rect.size.width/2.0), rawCoords.y+(rect.size.height/2.0));
+    printf("ball coordinates: (%lf,%lf)\n",transCoords.x,transCoords.y);
+    ballLayer.position = transCoords;
+    UIBezierPath *ballPath = [UIBezierPath bezierPathWithOvalInRect:ballLayer.bounds];
+    ballPath.lineWidth = 1.0;
+    ballLayer.path = ballPath.CGPath;
+    ballLayer.strokeColor = self.parentProj.projColor.CGColor;
+    ballLayer.fillColor = self.parentProj.projColor.CGColor;
+    
+    return ballLayer;
+} */
+
+
+
+/* generates a ball of the proper size and color
+ *  suitable for display in the radarview 
+ * re. scale: at 1x, 1pt = 1hr
+ */
+/*-(CALayer*) ballWithScale:(double)scale {
+    CAShapeLayer *ballLayer = [CAShapeLayer layer];
+    CGFloat ballSize = [self.hoursToComplete doubleValue] * (1.0/scale);
+    printf("deliv ball size= %lf\n",ballSize);
+    
+    ballLayer.bounds = CGRectMake(0, 0, ballSize, ballSize);
+    ballLayer.opacity = 1.0;
+    //ballLayer.position = [self coordsForScale:scale];
+    ballLayer.position = CGPointMake(100, 100);
+    UIBezierPath *ballPath = [UIBezierPath bezierPathWithOvalInRect:ballLayer.bounds];
+    ballPath.lineWidth = 1.0;
+    ballLayer.path = ballPath.CGPath;
+    ballLayer.strokeColor = self.parentProj.projColor.CGColor;
+    ballLayer.fillColor = self.parentProj.projColor.CGColor;
+    
+    return ballLayer;
+} */
+
 
 
 

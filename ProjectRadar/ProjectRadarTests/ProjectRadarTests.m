@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "ProjectManager.h"
+#import "Deliverable+Additions.h"
 
 @interface ProjectRadarTests : XCTestCase
 
@@ -18,24 +19,41 @@
 
 - (void)setUp {
     [super setUp];
-     /*
+    // /*
     ProjectManager *pm = [ProjectManager sharedInstance];
     Project *p1 = [pm addProjectWithName:@"proj1"
                    andDesc:@"first project"
                   andColor:[UIColor redColor]
-                andTraject:M_PI_4];
+                andTraject:0];
     
     Project *p2 = [pm addProjectWithName:@"proj2"
                    andDesc:@"second project"
                   andColor:[UIColor blueColor]
-                andTraject:M_PI];
+                andTraject:M_PI/2];
+    
+    Project *p3 = [pm addProjectWithName:@"proj2"
+                                 andDesc:@"second project"
+                                andColor:[UIColor yellowColor]
+                              andTraject:M_PI];
+    Project *p4 = [pm addProjectWithName:@"proj2"
+                                 andDesc:@"second project"
+                                andColor:[UIColor greenColor]
+                              andTraject:(1.5*M_PI)];
+
     
     [pm addDeliverableWithTitle:@"d1" andDesc:@"first deliv"
-                     andDueDate:[[NSDate date] dateByAddingTimeInterval:40000] andHrsToComp:10.2 toProject:p1];
+                     andDueDate:[[NSDate date] dateByAddingTimeInterval:10000] andHrsToComp:10.2 toProject:p1];
     
     [pm addDeliverableWithTitle:@"d2" andDesc:@"second deliv"
-                     andDueDate:[[NSDate date] dateByAddingTimeInterval:86000] andHrsToComp:5.2 toProject:p2];
-    */
+                     andDueDate:[[NSDate date] dateByAddingTimeInterval:36000] andHrsToComp:20 toProject:p2];
+    
+    [pm addDeliverableWithTitle:@"d3" andDesc:@"first deliv"
+                     andDueDate:[[NSDate date] dateByAddingTimeInterval:40000] andHrsToComp:30 toProject:p3];
+    
+    [pm addDeliverableWithTitle:@"d4" andDesc:@"first deliv"
+                     andDueDate:[[NSDate date] dateByAddingTimeInterval:20000] andHrsToComp:40 toProject:p4];
+
+    //*/
 
 }
 
@@ -43,7 +61,7 @@
     ProjectManager *pm = [ProjectManager sharedInstance];
     NSArray *delivs = [pm allDeliverables];
     for (Deliverable *d in delivs) {
-        NSLog(@"layer for deliverable: %@",[d ballWithScale:1.0]);
+        //NSLog(@"layer for deliverable: %@",[d setBallPositionInRect:<#(CGRect)#> withScale:<#(double)#>);
     }
 }
 
@@ -72,7 +90,7 @@
     NSArray *delivs = [pm allDeliverables];
     for (Deliverable *d in delivs) {
         NSLog(@"Coords for deliverable: %@",d);
-        [d coordsForScale:1.0];
+        //[d coordsForScale:1.0];
     }
 }
 
