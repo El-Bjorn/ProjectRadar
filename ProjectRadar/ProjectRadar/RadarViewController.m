@@ -23,7 +23,7 @@
     NSArray *delivs = [pm allDeliverables];
     for (Deliverable *d in delivs) {
         //CALayer *sublay = [d ballLayerWithScale:75.0 inRect:self.view.bounds];
-        CALayer *sublay = [d setBallPositionInRect:self.view.bounds withScale:170.0];
+        CALayer *sublay = [d setBallPositionInRect:self.view.bounds withScale:70.0];
         [self.view.layer addSublayer:sublay];
     }
     
