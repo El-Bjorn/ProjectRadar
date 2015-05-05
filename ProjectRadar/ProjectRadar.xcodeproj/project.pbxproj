@@ -14,7 +14,6 @@
 		4056224C1AD89FCF00838108 /* ProjectRadar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4056224A1AD89FCF00838108 /* ProjectRadar.xcdatamodeld */; };
 		4056224F1AD89FCF00838108 /* RadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4056224E1AD89FCF00838108 /* RadarViewController.m */; };
 		405622521AD89FCF00838108 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 405622501AD89FCF00838108 /* Main.storyboard */; };
-		405622541AD89FCF00838108 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 405622531AD89FCF00838108 /* Images.xcassets */; };
 		405622571AD89FCF00838108 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 405622551AD89FCF00838108 /* LaunchScreen.xib */; };
 		405622631AD89FD000838108 /* ProjectRadarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622621AD89FD000838108 /* ProjectRadarTests.m */; };
 		4056226F1AD8A1C700838108 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 4056226E1AD8A1C700838108 /* Project.m */; };
@@ -26,6 +25,8 @@
 		40D41F101AF8228D00F8CED8 /* DeliverableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D41F0E1AF8228D00F8CED8 /* DeliverableViewController.m */; };
 		40D41F131AF822F200F8CED8 /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D41F121AF822F200F8CED8 /* ProjectViewController.m */; };
 		40D41F141AF822F200F8CED8 /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D41F121AF822F200F8CED8 /* ProjectViewController.m */; };
+		40D41F2D1AF9762200F8CED8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D41F2C1AF9762200F8CED8 /* Images.xcassets */; };
+		40D41F2E1AF9762200F8CED8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D41F2C1AF9762200F8CED8 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,6 @@
 		4056224D1AD89FCF00838108 /* RadarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadarViewController.h; sourceTree = "<group>"; };
 		4056224E1AD89FCF00838108 /* RadarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RadarViewController.m; sourceTree = "<group>"; };
 		405622511AD89FCF00838108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		405622531AD89FCF00838108 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		405622561AD89FCF00838108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4056225C1AD89FD000838108 /* ProjectRadarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectRadarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		405622611AD89FD000838108 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +66,7 @@
 		40D41F0E1AF8228D00F8CED8 /* DeliverableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliverableViewController.m; sourceTree = "<group>"; };
 		40D41F111AF822F200F8CED8 /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
 		40D41F121AF822F200F8CED8 /* ProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewController.m; sourceTree = "<group>"; };
+		40D41F2C1AF9762200F8CED8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +91,11 @@
 		405622371AD89FCF00838108 = {
 			isa = PBXGroup;
 			children = (
-				40B0030C1AF09A5B00A62753 /* CoreGraphics.framework */,
 				405622421AD89FCF00838108 /* ProjectRadar */,
+				40D41F2C1AF9762200F8CED8 /* Images.xcassets */,
 				4056225F1AD89FD000838108 /* ProjectRadarTests */,
 				405622411AD89FCF00838108 /* Products */,
+				40D41F151AF9693300F8CED8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,7 +118,6 @@
 				405622761AD8A20900838108 /* project view */,
 				4056226C1AD8A18700838108 /* model */,
 				405622501AD89FCF00838108 /* Main.storyboard */,
-				405622531AD89FCF00838108 /* Images.xcassets */,
 				405622551AD89FCF00838108 /* LaunchScreen.xib */,
 				405622431AD89FCF00838108 /* Supporting Files */,
 			);
@@ -200,6 +201,14 @@
 			name = "Deliverable view";
 			sourceTree = "<group>";
 		};
+		40D41F151AF9693300F8CED8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				40B0030C1AF09A5B00A62753 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -280,9 +289,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40D41F2D1AF9762200F8CED8 /* Images.xcassets in Resources */,
 				405622521AD89FCF00838108 /* Main.storyboard in Resources */,
 				405622571AD89FCF00838108 /* LaunchScreen.xib in Resources */,
-				405622541AD89FCF00838108 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40D41F2E1AF9762200F8CED8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

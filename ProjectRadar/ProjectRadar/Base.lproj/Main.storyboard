@@ -16,9 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flt-yH-G6m">
-                                <rect key="frame" x="284" y="599" width="46" height="30"/>
-                                <state key="normal" title="Add">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="radarBG" translatesAutoresizingMaskIntoConstraints="NO" id="7IN-is-W9P">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="radar" translatesAutoresizingMaskIntoConstraints="NO" id="5jj-ck-ToX">
+                                <rect key="frame" x="5" y="120" width="364" height="364"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="horizrule" translatesAutoresizingMaskIntoConstraints="NO" id="aCZ-Ul-cxU">
+                                <rect key="frame" x="46" y="74" width="287" height="1"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flt-yH-G6m">
+                                <rect key="frame" x="265" y="569" width="50" height="50"/>
+                                <state key="normal" image="addaproject">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -221,6 +231,12 @@
             <point key="canvasLocation" x="1446.5" y="187.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="addaproject" width="35" height="35"/>
+        <image name="horizrule" width="270" height="1"/>
+        <image name="radar" width="305" height="305"/>
+        <image name="radarBG" width="320" height="568"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Gm7-np-dRJ"/>
     </inferredMetricsTieBreakers>
