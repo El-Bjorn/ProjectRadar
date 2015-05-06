@@ -25,16 +25,8 @@
     for (Deliverable *d in delivs) {
         CALayer *sublay = [d generateBallLayer];
         [d repositionBallLayerInRect:self.radarGrid.bounds withScale:self.radarGrid.currentScale];
-        //CALayer *sublay = [d ballLayerInRect:self.radarGrid.bounds
-                                       //  withScale:self.radarGrid.currentScale];
         [self.radarGrid.layer addSublayer:sublay];
     }
-    
-    
-    
-    //self.view.backgroundColor = [UIColor redColor]; // sanity test
-    
-
 }
 
 - (void)didReceiveMemoryWarning {
