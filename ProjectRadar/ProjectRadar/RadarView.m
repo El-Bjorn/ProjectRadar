@@ -25,7 +25,7 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    NSLog(@"calling drawRect");
+    //NSLog(@"calling drawRect");
     ProjectManager *pm = [ProjectManager sharedInstance];
     NSArray *delivs = [pm allDeliverables];
     

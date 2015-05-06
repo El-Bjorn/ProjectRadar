@@ -19,6 +19,16 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="radarBG" translatesAutoresizingMaskIntoConstraints="NO" id="7IN-is-W9P">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flt-yH-G6m">
+                                <rect key="frame" x="265" y="569" width="50" height="50"/>
+                                <state key="normal" image="addaproject">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="zaA-tC-Hqh" kind="modal" identifier="AddDeliverable" id="Mnf-D1-mN4"/>
+                                </connections>
+                            </button>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="radar" translatesAutoresizingMaskIntoConstraints="NO" id="5jj-ck-ToX">
                                 <rect key="frame" x="5" y="120" width="364" height="364"/>
                                 <gestureRecognizers/>
@@ -32,18 +42,21 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="F6P-3C-gIR" appends="YES" id="ZGQ-r3-f6K"/>
+                                    <outletCollection property="gestureRecognizers" destination="mXQ-bU-ubi" appends="YES" id="kEd-CB-Uwt"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flt-yH-G6m">
-                                <rect key="frame" x="265" y="569" width="50" height="50"/>
-                                <state key="normal" image="addaproject">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="zaA-tC-Hqh" kind="modal" identifier="AddDeliverable" id="Mnf-D1-mN4"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1 Ring = " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qb-Mx-Hpj">
+                                <rect key="frame" x="16" y="83" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1 day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTF-yc-QRr">
+                                <rect key="frame" x="94" y="83" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -51,14 +64,16 @@
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="radarGrid" destination="2bM-Ej-KER" id="ICe-fy-mcP"/>
+                        <outlet property="scaleLabel" destination="OTF-yc-QRr" id="KYw-zC-L8Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer scale="100" id="F6P-3C-gIR">
+                <pinchGestureRecognizer scale="100" id="F6P-3C-gIR"/>
+                <tapGestureRecognizer id="mXQ-bU-ubi">
                     <connections>
-                        <action selector="pinchGesture:" destination="vXZ-lx-hvc" id="52T-Na-tn8"/>
+                        <action selector="tappedRadar:" destination="vXZ-lx-hvc" id="xjR-sD-iMM"/>
                     </connections>
-                </pinchGestureRecognizer>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="122.5" y="329.5"/>
         </scene>

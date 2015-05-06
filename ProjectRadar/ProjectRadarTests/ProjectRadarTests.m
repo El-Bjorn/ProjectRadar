@@ -15,6 +15,8 @@
 
 @end
 
+#define ONE_DAY_IN_SECS 86400
+
 @implementation ProjectRadarTests
 
 - (void)setUp {
@@ -40,20 +42,29 @@
                                 andColor:[UIColor greenColor]
                               andTraject:(1.5*M_PI)];
 
-    
+    NSDate *dueDate = [[NSDate date] dateByAddingTimeInterval:ONE_DAY_IN_SECS];
+    NSLog(@"due date= %@",dueDate);
     [pm addDeliverableWithTitle:@"d1" andDesc:@"first deliv"
-                     andDueDate:[[NSDate date] dateByAddingTimeInterval:10000] andHrsToComp:10.2 toProject:p1];
+                     andDueDate:dueDate andHrsToComp:20 toProject:p1];
     
+    dueDate = [[NSDate date] dateByAddingTimeInterval:ONE_DAY_IN_SECS*2];
+    NSLog(@"due date= %@",dueDate);
     [pm addDeliverableWithTitle:@"d2" andDesc:@"second deliv"
-                     andDueDate:[[NSDate date] dateByAddingTimeInterval:36000] andHrsToComp:20 toProject:p2];
+                     andDueDate:dueDate andHrsToComp:20 toProject:p2];
     
+    dueDate = [[NSDate date] dateByAddingTimeInterval:ONE_DAY_IN_SECS*7];
+    NSLog(@"due date= %@",dueDate);
     [pm addDeliverableWithTitle:@"d3" andDesc:@"first deliv"
-                     andDueDate:[[NSDate date] dateByAddingTimeInterval:40000] andHrsToComp:30 toProject:p3];
+                     andDueDate:dueDate andHrsToComp:20 toProject:p3];
     
-    [pm addDeliverableWithTitle:@"d4" andDesc:@"first deliv"
-                     andDueDate:[[NSDate date] dateByAddingTimeInterval:20000] andHrsToComp:40 toProject:p4];
+    dueDate = [[NSDate date] dateByAddingTimeInterval:ONE_DAY_IN_SECS*14];
+    NSLog(@"due date= %@",dueDate);
 
-    //*/
+    [pm addDeliverableWithTitle:@"d4" andDesc:@"first deliv"
+                     andDueDate:dueDate
+                     andHrsToComp:20 toProject:p4];
+
+    
 
 }
 

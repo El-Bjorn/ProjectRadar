@@ -273,9 +273,17 @@ static ProjectManager *ourSharedInstance = nil;
     double secs_til_due_date = [self.dueDate timeIntervalSinceDate:[NSDate date]];
     // in days
     double due_date_dist = secs_til_due_date / SECS_PER_DAY;
+    // fudge
+    due_date_dist += (due_date_dist * 0.58);
+    //printf("due_date_dist= %lf\n",due_date_dist);
+    //due_date_dist += exp(due_date_dist*0.18)-1;
+    //printf("fudged due_date_dist= %lf\n",due_date_dist);
     // scaled distance in radar rings (this is our hypotenuse)
     double scaled_due_dist = due_date_dist * scale;
-    //printf("scaled distance: %lf\n", scaled_due_dist);
+    //printf("scaled_due_dist= %lf\n",scaled_due_dist);
+    //scaled_due_dist = exp(scaled_due_dist*0.01)-1;
+    //scaled_due_dist += (0.5 * scaled_due_dist);
+    //printf("fudged scaled_due_dist: %lf\n", scaled_due_dist);
     //double traject = [self.parentProj.trajectRadian doubleValue];
     //printf("trajectory in degrees: %lf\n",(360*traject)/(2*M_PI));
     // adjacent
@@ -283,7 +291,7 @@ static ProjectManager *ourSharedInstance = nil;
     //printf("y pos: %lf\n",y_pos);
     // opposite
     double x_pos = sin([self.parentProj.trajectRadian doubleValue])*scaled_due_dist;
-    printf("x pos: %lf\n",x_pos);
+    //printf("x pos: %lf\n",x_pos);
     
     CGPoint pt = CGPointMake(x_pos, y_pos);
     

@@ -11,9 +11,11 @@
 
 @interface RadarViewController : UIViewController
 
-@property (nonatomic,weak) IBOutlet RadarView *radarGrid;
-
 - (IBAction)pinchGesture:(UIPinchGestureRecognizer *)sender;
+- (IBAction)tappedRadar:(UITapGestureRecognizer *)sender;
+
+@property (nonatomic,weak) IBOutlet RadarView *radarGrid;
+@property (weak, nonatomic) IBOutlet UILabel *scaleLabel;
 
 @end
 
