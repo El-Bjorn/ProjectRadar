@@ -22,9 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.current_scale_index = 0;
+    self.current_scale_index = 2;
     [self setupScalingTable];
     self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
+    self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
+
     
     ProjectManager *pm = [ProjectManager sharedInstance];
     
@@ -37,12 +39,14 @@
 }
 
 -(void) setupScalingTable {
-    self.scalingTable = @[ @{SCALE_TEXT: @"12 hours", SCALE_VALUE: @(30.0)},
+    self.scalingTable = @[ @{SCALE_TEXT: @"6 hours", SCALE_VALUE: @(60.0)},
+                           @{SCALE_TEXT: @"12 hours", SCALE_VALUE: @(30.0)},
                            @{ SCALE_TEXT: @"1 Day", SCALE_VALUE: @(15.0) },
                            @{ SCALE_TEXT: @"2 Days", SCALE_VALUE: @(7.2) },
                            @{ SCALE_TEXT: @"3 Days", SCALE_VALUE: @(4.5) },
                            @{ SCALE_TEXT: @"7 Days", SCALE_VALUE: @(2.0) },
-                           @{ SCALE_TEXT: @"14 Days",SCALE_VALUE: @(0.9) }
+                           @{ SCALE_TEXT: @"14 Days",SCALE_VALUE: @(0.9) },
+                           @{ SCALE_TEXT: @"28 Days",SCALE_VALUE: @(0.45) }
                            ];
 }
 
@@ -52,27 +56,39 @@
 }
 
 - (IBAction)pinchGesture:(UIPinchGestureRecognizer *)sender {
-    NSLog(@"pinched! ouch! velocity = %lf",sender.velocity);
-    if (fabs(sender.velocity)  > 1) {
-        return;
-    }
-    if (sender.scale > 1.0) { // reduce radar screen
-        //self.radarGrid.currentScale -= 0.1;
-        self.current_scale_index--;
-        if (self.current_scale_index < 0) {
-            self.current_scale_index = 0;
+    static BOOL pinchLock = NO;
+    if (pinchLock == NO) {
+        NSLog(@"pinched! ouch! velocity = %lf",sender.velocity);
+        if (sender.scale > 1.0) { // reduce radar screen
+            //self.radarGrid.currentScale -= 0.1;
+            self.current_scale_index--;
+            if (self.current_scale_index < 0) {
+                self.current_scale_index = 0;
+            }
+        } else {
+            self.current_scale_index++;
+            if (self.current_scale_index >= self.scalingTable.count) {
+                self.current_scale_index = self.scalingTable.count-1;
+            }
+            //self.radarGrid.currentScale += 0.1;
         }
-    } else {
-        self.current_scale_index++;
-        if (self.current_scale_index >= self.scalingTable.count) {
-            self.current_scale_index = self.scalingTable.count-1;
-        }
-        //self.radarGrid.currentScale += 0.1;
+        self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
+        self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
+        printf("current grid scale: %lf\n",self.radarGrid.currentScale);
+        // disable for a moment
+        //NSLog(@"disabling pinch");
+        //sender.enabled = NO;
+        pinchLock = YES;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //NSLog(@"reenabling pinch");
+            //sender.enabled = YES;
+            pinchLock = NO;
+        });
+        [self.radarGrid setNeedsDisplay];
+
     }
-    self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
-    self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
-    printf("current grid scale: %lf\n",self.radarGrid.currentScale);
-    [self.radarGrid setNeedsDisplay];
+    
+    
 
 }
 

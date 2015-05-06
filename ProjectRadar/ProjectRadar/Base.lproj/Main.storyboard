@@ -68,12 +68,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer scale="100" id="F6P-3C-gIR"/>
-                <tapGestureRecognizer id="mXQ-bU-ubi">
+                <pinchGestureRecognizer scale="100" id="F6P-3C-gIR">
                     <connections>
-                        <action selector="tappedRadar:" destination="vXZ-lx-hvc" id="xjR-sD-iMM"/>
+                        <action selector="pinchGesture:" destination="vXZ-lx-hvc" id="2TB-TW-LEE"/>
                     </connections>
-                </tapGestureRecognizer>
+                </pinchGestureRecognizer>
+                <tapGestureRecognizer id="mXQ-bU-ubi"/>
             </objects>
             <point key="canvasLocation" x="122.5" y="329.5"/>
         </scene>
