@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RadarView.h"
 
 @interface RadarViewController : UIViewController
 
+@property (nonatomic,weak) IBOutlet RadarView *radarGrid;
+
+- (IBAction)pinchGesture:(UIPinchGestureRecognizer *)sender;
 
 @end
 

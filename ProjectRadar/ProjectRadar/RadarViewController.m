@@ -17,14 +17,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.radarGrid.currentScale = 100.0;
     
     ProjectManager *pm = [ProjectManager sharedInstance];
     
     NSArray *delivs = [pm allDeliverables];
     for (Deliverable *d in delivs) {
-        //CALayer *sublay = [d ballLayerWithScale:75.0 inRect:self.view.bounds];
-        CALayer *sublay = [d setBallPositionInRect:self.view.bounds withScale:70.0];
-        [self.view.layer addSublayer:sublay];
+        CALayer *sublay = [d generateBallLayer];
+        [d repositionBallLayerInRect:self.radarGrid.bounds withScale:self.radarGrid.currentScale];
+        //CALayer *sublay = [d ballLayerInRect:self.radarGrid.bounds
+                                       //  withScale:self.radarGrid.currentScale];
+        [self.radarGrid.layer addSublayer:sublay];
     }
     
     
@@ -39,4 +42,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)pinchGesture:(UIPinchGestureRecognizer *)sender {
+    NSLog(@"pinched! ouch! scale= %lf",sender.scale);
+    if (sender.scale < 1.0) {
+        self.radarGrid.currentScale -= 20;
+    } else {
+        self.radarGrid.currentScale += 20;
+    }
+    [self.radarGrid setNeedsDisplay];
+
+}
 @end

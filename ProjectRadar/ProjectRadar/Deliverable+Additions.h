@@ -16,7 +16,10 @@
 
 -(CALayer*) generateBallLayer;
 
--(CALayer*) setBallPositionInRect:(CGRect)rect withScale:(double)scale;
+//-(CALayer*) setBallPositionInRect:(CGRect)rect withScale:(double)scale;
+//-(CALayer*) ballLayerInRect:(CGRect)rect withScale:(double)scale;
+
+-(void) repositionBallLayerInRect:(CGRect)rect withScale:(double)scale;
 
 
 // used to generate deliverable dot

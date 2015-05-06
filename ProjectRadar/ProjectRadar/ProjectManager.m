@@ -88,7 +88,7 @@ static ProjectManager *ourSharedInstance = nil;
     deliv.dueDate = date;
     deliv.hoursToComplete = @(hours);
     deliv.parentProj = proj;
-    [deliv generateBallLayer];
+    //deliv.ballLayer = [deliv generateBallLayer];
     
     [self saveContext];
     
@@ -257,13 +257,25 @@ static ProjectManager *ourSharedInstance = nil;
 
 #define SECS_PER_DAY (24*60*60)
 
--(CALayer*) setBallPositionInRect:(CGRect)rect withScale:(double)scale {
+/*-(CALayer*) ballLayerInRect:(CGRect)rect withScale:(double)scale {
+    printf("set position for scale: %lf\n",scale);
     // scaled, but not translated
     CGPoint rawCoords = [self coordsForScale:scale];
     CGPoint transCoords = CGPointMake(rawCoords.x+(rect.size.width/2.0), rawCoords.y+(rect.size.height/2.0));
     self.ballLayer.position = transCoords;
     
+    printf("new ball coords (%lf,%lf)\n",transCoords.x,transCoords.y);
+    
     return self.ballLayer;
+} */
+
+-(void) repositionBallLayerInRect:(CGRect)rect withScale:(double)scale {
+    CGPoint rawCoords = [self coordsForScale:scale];
+    CGPoint transCoords = CGPointMake(rawCoords.x+(rect.size.width/2.0), rawCoords.y+(rect.size.height/2.0));
+    if (self.ballLayer.superlayer == nil) {
+        printf("AAHHHHHH balllayer has no superlayer! WTF!\n");
+    }
+    self.ballLayer.position = transCoords;
 }
 
 
@@ -274,12 +286,12 @@ static ProjectManager *ourSharedInstance = nil;
     double due_date_dist = secs_til_due_date / SECS_PER_DAY;
     // scaled distance in radar rings (this is our hypotenuse)
     double scaled_due_dist = due_date_dist * scale;
-    printf("scaled distance: %lf\n", scaled_due_dist);
-    double traject = [self.parentProj.trajectRadian doubleValue];
-    printf("trajectory in degrees: %lf\n",(360*traject)/(2*M_PI));
+    //printf("scaled distance: %lf\n", scaled_due_dist);
+    //double traject = [self.parentProj.trajectRadian doubleValue];
+    //printf("trajectory in degrees: %lf\n",(360*traject)/(2*M_PI));
     // adjacent
     double y_pos = -(cos([self.parentProj.trajectRadian doubleValue])*scaled_due_dist);
-    printf("y pos: %lf\n",y_pos);
+    //printf("y pos: %lf\n",y_pos);
     // opposite
     double x_pos = sin([self.parentProj.trajectRadian doubleValue])*scaled_due_dist;
     printf("x pos: %lf\n",x_pos);
