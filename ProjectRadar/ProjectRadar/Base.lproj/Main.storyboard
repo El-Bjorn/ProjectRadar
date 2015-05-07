@@ -104,6 +104,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="saveDeliverable:" destination="zaA-tC-Hqh" eventType="touchUpInside" id="fph-mx-gaA"/>
                                     <segue destination="vXZ-lx-hvc" kind="presentation" identifier="SaveToRadar" id="Gm7-np-dRJ"/>
                                 </connections>
                             </button>
@@ -115,6 +116,9 @@
                             </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="40" translatesAutoresizingMaskIntoConstraints="NO" id="rjh-Ff-u2t">
                                 <rect key="frame" x="265" y="309" width="94" height="29"/>
+                                <connections>
+                                    <action selector="modifyHoursToComplete:" destination="zaA-tC-Hqh" eventType="valueChanged" id="Yw7-F0-qRy"/>
+                                </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours to Complete" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vU7-0A-k5F">
                                 <rect key="frame" x="93" y="313" width="147" height="21"/>
@@ -170,6 +174,14 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="DelivDesc" destination="J3I-Vz-v9N" id="BJI-SF-sie"/>
+                        <outlet property="delivName" destination="cdM-EP-GFn" id="7Yz-jf-R7W"/>
+                        <outlet property="dueDatePicker" destination="zcP-NS-JHn" id="XKF-AO-GUm"/>
+                        <outlet property="hoursToComp" destination="rjh-Ff-u2t" id="2fp-ol-VT4"/>
+                        <outlet property="hoursToCompleteText" destination="JVE-TD-Xda" id="BVP-mz-1Aw"/>
+                        <outlet property="projectSelector" destination="Sh1-ye-cT5" id="Umy-i0-2TJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBJ-UC-DaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

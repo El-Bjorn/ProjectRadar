@@ -33,11 +33,11 @@
                   andColor:[UIColor blueColor]
                 andTraject:M_PI/2];
     
-    Project *p3 = [pm addProjectWithName:@"proj2"
+    Project *p3 = [pm addProjectWithName:@"proj3"
                                  andDesc:@"second project"
                                 andColor:[UIColor yellowColor]
                               andTraject:M_PI];
-    Project *p4 = [pm addProjectWithName:@"proj2"
+    Project *p4 = [pm addProjectWithName:@"proj4"
                                  andDesc:@"second project"
                                 andColor:[UIColor greenColor]
                               andTraject:(1.5*M_PI)];

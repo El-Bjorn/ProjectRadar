@@ -15,7 +15,7 @@
 #define DELIV_ENTITY @"Deliverable"
 
 
-@interface ProjectManager : NSObject
+@interface ProjectManager : NSObject <UIPickerViewDataSource, UIPickerViewDelegate>
 
 // macros for converting degrees <-> radians
 #define DEGREES(R)  ((R*180.0)/M_PI)
@@ -43,9 +43,16 @@
 
 -(NSArray*) allProjects;
 
+-(Project*) projWithName:(NSString*)name;
+
 -(NSArray*) allDeliverables;
 
 -(NSArray*) allDeliverablesFromProj:(Project*)proj;
+
+// project picker datasource
+-(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView;
+-(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component;
+
 
 
 @end

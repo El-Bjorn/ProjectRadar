@@ -114,6 +114,24 @@ static ProjectManager *ourSharedInstance = nil;
     return projs;
 }
 
+-(Project*) projWithName:(NSString *)name {
+    NSError *err = nil;
+    NSArray *projs = nil;
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:PROJ_ENTITY];
+    fetch.predicate = [NSPredicate predicateWithFormat:@"projName= %@",name];
+    projs = [self.managedObjectContext executeFetchRequest:fetch error:&err];
+    if (projs.count == 0) {
+        NSLog(@"no project named: %@ found",name);
+        return nil;
+    }
+    if (err) {
+        NSLog(@"project fetch failed: %@",err);
+        return nil;
+    }
+    return projs[0];
+    
+}
+
 -(NSArray*) allDeliverables {
     NSError *err = nil;
     NSArray *delivs = nil;
@@ -221,6 +239,34 @@ static ProjectManager *ourSharedInstance = nil;
     }
 }
 
+#pragma mark - Project Picker
+
+
+-(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+-(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.allProjects.count;
+}
+
+-(CGFloat) pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return 40.0;
+}
+
+-(CGFloat) pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    return 100.0;
+}
+
+-(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    Project *p = self.allProjects[row];
+    return p.projName;
+}
+
+
+
+
+
+
 
 @end
 
@@ -250,7 +296,7 @@ static ProjectManager *ourSharedInstance = nil;
     ballLayer.path = ballPath.CGPath;
     ballLayer.strokeColor = self.parentProj.projColor.CGColor;
     ballLayer.fillColor = self.parentProj.projColor.CGColor;
-    self.ballLayer = ballLayer;
+    //self.ballLayer = ballLayer;
     
     return ballLayer;
 }
@@ -297,6 +343,7 @@ static ProjectManager *ourSharedInstance = nil;
     
     return pt;
 }
+
 
 
 @end

@@ -20,21 +20,23 @@
 #define SCALE_VALUE @"scaleValue"
 #define SCALE_TEXT  @"scaleText"
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.current_scale_index = 2;
     [self setupScalingTable];
     self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
     self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
-
+    
     
     ProjectManager *pm = [ProjectManager sharedInstance];
     
     NSArray *delivs = [pm allDeliverables];
     for (Deliverable *d in delivs) {
-        CALayer *sublay = [d generateBallLayer];
+        d.ballLayer = [d generateBallLayer];
+        [self.radarGrid.layer addSublayer:d.ballLayer];
         [d repositionBallLayerInRect:self.radarGrid.bounds withScale:self.radarGrid.currentScale];
-        [self.radarGrid.layer addSublayer:sublay];
     }
 }
 
