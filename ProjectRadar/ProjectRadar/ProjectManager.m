@@ -90,7 +90,7 @@ static ProjectManager *ourSharedInstance = nil;
     deliv.parentProj = proj;
     //deliv.ballLayer = [deliv generateBallLayer];
     
-    //[self saveContext];
+    [self saveContext];
     
     return deliv;
 }
@@ -100,7 +100,6 @@ static ProjectManager *ourSharedInstance = nil;
         return;
     }
     [self.managedObjectContext deleteObject:deliv];
-    //[self saveContext];
 }
 
 
@@ -230,6 +229,7 @@ static ProjectManager *ourSharedInstance = nil;
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
+    NSLog(@"ProjectManager saving context....");
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         NSError *error = nil;
@@ -257,7 +257,7 @@ static ProjectManager *ourSharedInstance = nil;
 }
 
 -(CGFloat) pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    return 100.0;
+    return 500.0;
 }
 
 -(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {

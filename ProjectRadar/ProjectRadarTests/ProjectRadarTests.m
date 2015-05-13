@@ -21,50 +21,52 @@
 
 - (void)setUp {
     [super setUp];
-    // /*
+    ///*
     ProjectManager *pm = [ProjectManager sharedInstance];
-    Project *p1 = [pm addProjectWithName:@"proj1"
+    Project *p1 = [pm addProjectWithName:@"proj1 (red 0-deg)"
                    andDesc:@"first project"
                   andColor:[UIColor redColor]
                 andTraject:0];
     
-    Project *p2 = [pm addProjectWithName:@"proj2"
+    Project *p2 = [pm addProjectWithName:@"proj2 (blue 90-deg)"
                    andDesc:@"second project"
                   andColor:[UIColor blueColor]
                 andTraject:M_PI/2];
     
-    Project *p3 = [pm addProjectWithName:@"proj3"
+    Project *p3 = [pm addProjectWithName:@"proj3 (yellow 180-deg)"
                                  andDesc:@"second project"
                                 andColor:[UIColor yellowColor]
                               andTraject:M_PI];
-    Project *p4 = [pm addProjectWithName:@"proj4"
+    Project *p4 = [pm addProjectWithName:@"proj4 (green 270-deg)"
                                  andDesc:@"second project"
                                 andColor:[UIColor greenColor]
                               andTraject:(1.5*M_PI)];
 
     NSDate *dueDate = [[NSDate date] dateByAddingTimeInterval:ONE_DAY_IN_SECS];
     NSLog(@"due date= %@",dueDate);
-    [pm addDeliverableWithTitle:@"d1" andDesc:@"first deliv"
+    [pm addDeliverableWithTitle:@"proj1-d1" andDesc:@"first deliv"
                      andDueDate:dueDate andHrsToComp:20 toProject:p1];
     
     dueDate = [[NSDate date] dateByAddingTimeInterval:ONE_DAY_IN_SECS*2];
     NSLog(@"due date= %@",dueDate);
-    [pm addDeliverableWithTitle:@"d2" andDesc:@"second deliv"
+    [pm addDeliverableWithTitle:@"proj2-d1" andDesc:@"second deliv"
                      andDueDate:dueDate andHrsToComp:20 toProject:p2];
     
     dueDate = [[NSDate date] dateByAddingTimeInterval:ONE_DAY_IN_SECS*7];
     NSLog(@"due date= %@",dueDate);
-    [pm addDeliverableWithTitle:@"d3" andDesc:@"first deliv"
+    [pm addDeliverableWithTitle:@"proj3-d1" andDesc:@"first deliv"
                      andDueDate:dueDate andHrsToComp:20 toProject:p3];
     
     dueDate = [[NSDate date] dateByAddingTimeInterval:ONE_DAY_IN_SECS*14];
     NSLog(@"due date= %@",dueDate);
 
-    [pm addDeliverableWithTitle:@"d4" andDesc:@"first deliv"
+    [pm addDeliverableWithTitle:@"proj4-d1" andDesc:@"first deliv"
                      andDueDate:dueDate
                      andHrsToComp:20 toProject:p4];
-
     
+    [pm saveContext];
+
+    //*/
 
 }
 

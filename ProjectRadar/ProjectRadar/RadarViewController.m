@@ -32,12 +32,27 @@
     
     ProjectManager *pm = [ProjectManager sharedInstance];
     
+/*    NSArray *delivs = [pm allDeliverables];
+    for (Deliverable *d in delivs) {
+        d.ballLayer = [d generateBallLayer];
+        [self.radarGrid.layer addSublayer:d.ballLayer];
+        [d repositionInRect:self.radarGrid.bounds withScale:self.radarGrid.currentScale];
+    } */
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    ProjectManager *pm = [ProjectManager sharedInstance];
     NSArray *delivs = [pm allDeliverables];
+    
+    self.radarGrid.layer.sublayers = nil;
+    
     for (Deliverable *d in delivs) {
         d.ballLayer = [d generateBallLayer];
         [self.radarGrid.layer addSublayer:d.ballLayer];
         [d repositionInRect:self.radarGrid.bounds withScale:self.radarGrid.currentScale];
     }
+
+    
 }
 
 -(void) setupScalingTable {
