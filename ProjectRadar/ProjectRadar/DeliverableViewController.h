@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *projectSelector;
 
 @property (weak, nonatomic) IBOutlet UITextField *delivName;
-@property (weak, nonatomic) IBOutlet UITextView *DelivDesc;
+@property (weak, nonatomic) IBOutlet UITextView *delivDesc;
 
 // hours to complete deliverable
 @property (weak, nonatomic) IBOutlet UIStepper *hoursToComp;

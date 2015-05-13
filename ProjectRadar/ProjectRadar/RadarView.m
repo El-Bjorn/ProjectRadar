@@ -9,36 +9,57 @@
 #import "RadarView.h"
 #import "ProjectManager.h"
 
-@implementation RadarView
+@interface RadarView ()
+@property (nonatomic,weak) Deliverable *selectedDeliv;
+
+@end
+
+@implementation RadarView 
 
 -(instancetype) initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         NSLog(@"init RadarView");
+        self.selectedDeliv = nil;
         self.userInteractionEnabled = YES;
     }
     return self;
 }
 
+#define TOUCHRECT_INSET -15.0
+
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:self];
-    printf("touch location: (%lf,%lf)\n",location.x,location.y);
+    //printf("touch location: (%lf,%lf)\n",location.x,location.y);
     
     ProjectManager *pm = [ProjectManager sharedInstance];
     
-    /*CALayer *hitLayer = [self.layer.presentationLayer hitTest:location];
-    if (hitLayer) {
-        NSLog(@"got hit: %@",hitLayer);
-    } */
-    
     for (Deliverable *d in [pm allDeliverables]) {
-        if (CGRectContainsPoint(d.ballLayer.frame, location)) {
+        if (CGRectContainsPoint(CGRectInset(d.ballLayer.frame, TOUCHRECT_INSET, TOUCHRECT_INSET), location)) {
             NSLog(@"deliv contains point");
+            self.selectedDeliv = d;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Point" message:@"confirm" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"delete",nil];
+            [alert show];
         }
        // if ([d.ballLayer.presentationLayer containsPoint:location]) {
         //    NSLog(@"deliv %@ contains point",d);
         //}
+    }
+    
+}
+
+#define CANCEL_INDEX 0
+#define DELETE_INDEX 1
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    printf("buttonIndex pressed: %ld\n",buttonIndex);
+    if (buttonIndex == DELETE_INDEX) {
+        ProjectManager *pm = [ProjectManager sharedInstance];
+        [self.selectedDeliv.ballLayer removeFromSuperlayer];
+        [pm deleteDeliverable:self.selectedDeliv];
+    } else { // cancelling
+        self.selectedDeliv = nil;
     }
     
 }
@@ -53,9 +74,7 @@
     NSArray *delivs = [pm allDeliverables];
     
     for (Deliverable *d in delivs) {
-        [d repositionBallLayerInRect:self.bounds withScale:self.currentScale];
-        //NSLog(@"deliv layer %@",d);
-        printf("deliv layer frame (%lf,%lf) w= %lf h= %lf\n",d.ballLayer.frame.origin.x,d.ballLayer.frame.origin.y,d.ballLayer.frame.size.width,d.ballLayer.frame.size.height);
+        [d repositionInRect:self.bounds withScale:self.currentScale];
     }
 }
 

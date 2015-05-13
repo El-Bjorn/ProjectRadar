@@ -23,7 +23,7 @@
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
-- (void)saveContext;
+-(void) saveContext;
 +(instancetype) sharedInstance;
 
 -(Project*) addProjectWithName:(NSString*)name

@@ -69,8 +69,8 @@
 		40D41F2C1AF9762200F8CED8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		40D41F2F1AF999A200F8CED8 /* RadarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadarView.h; sourceTree = "<group>"; };
 		40D41F301AF999A200F8CED8 /* RadarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadarView.m; sourceTree = "<group>"; };
-		40D41F331AFA70BE00F8CED8 /* Deliverable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deliverable.h; sourceTree = "<group>"; };
-		40D41F341AFA70BE00F8CED8 /* Deliverable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deliverable.m; sourceTree = "<group>"; };
+		40D41F331AFA70BE00F8CED8 /* Deliverable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deliverable.h; path = ../Deliverable.h; sourceTree = "<group>"; };
+		40D41F341AFA70BE00F8CED8 /* Deliverable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Deliverable.m; path = ../Deliverable.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +95,6 @@
 		405622371AD89FCF00838108 = {
 			isa = PBXGroup;
 			children = (
-				40D41F331AFA70BE00F8CED8 /* Deliverable.h */,
-				40D41F341AFA70BE00F8CED8 /* Deliverable.m */,
 				405622421AD89FCF00838108 /* ProjectRadar */,
 				40D41F2C1AF9762200F8CED8 /* Images.xcassets */,
 				4056225F1AD89FD000838108 /* ProjectRadarTests */,
@@ -189,6 +187,8 @@
 		4056227B1AD8AC7100838108 /* core data */ = {
 			isa = PBXGroup;
 			children = (
+				40D41F331AFA70BE00F8CED8 /* Deliverable.h */,
+				40D41F341AFA70BE00F8CED8 /* Deliverable.m */,
 				4056224A1AD89FCF00838108 /* ProjectRadar.xcdatamodeld */,
 				4056226D1AD8A1C700838108 /* Project.h */,
 				4056226E1AD8A1C700838108 /* Project.m */,

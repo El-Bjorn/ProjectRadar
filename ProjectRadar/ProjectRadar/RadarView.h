@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RadarView : UIView
+@interface RadarView : UIView <UIAlertViewDelegate>
+
 @property (nonatomic,assign) CGFloat currentScale;
 
 @end

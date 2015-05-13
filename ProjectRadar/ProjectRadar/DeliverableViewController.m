@@ -28,11 +28,6 @@
     self.hoursToComp.stepValue = 0.5;
     self.hoursToCompleteText.text = [NSString stringWithFormat:@"%.1lf",self.hoursToComp.value];
     
-    //self.projectSelector.numberOfComponents
-    
-    
-    //self.projectSelector
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,10 +49,14 @@
     ProjectManager *pm = [ProjectManager sharedInstance];
     long projIndex = [self.projectSelector selectedRowInComponent:0];
     
-    [pm addDeliverableWithTitle:self.delivName.text andDesc:self.DelivDesc.text andDueDate:self.dueDatePicker.date andHrsToComp:self.hoursToComp.value toProject:pm.allProjects[projIndex]];
+    
+    [pm addDeliverableWithTitle:self.delivName.text andDesc:self.delivDesc.text andDueDate:self.dueDatePicker.date andHrsToComp:self.hoursToComp.value toProject:pm.allProjects[projIndex]];
+
 }
 - (IBAction)modifyHoursToComplete:(UIStepper*)sender {
-    NSLog(@"stepper = %@",sender);
+    [self.delivName resignFirstResponder];
+    [self.delivDesc resignFirstResponder];
+    //NSLog(@"stepper = %@",sender);
     self.hoursToCompleteText.text = [NSString stringWithFormat:@"%.1lf",self.hoursToComp.value];
 }
 @end

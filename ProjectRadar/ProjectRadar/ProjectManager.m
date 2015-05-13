@@ -90,14 +90,17 @@ static ProjectManager *ourSharedInstance = nil;
     deliv.parentProj = proj;
     //deliv.ballLayer = [deliv generateBallLayer];
     
-    [self saveContext];
+    //[self saveContext];
     
     return deliv;
 }
 
 -(void) deleteDeliverable:(Deliverable *)deliv {
+    if (deliv==nil) {
+        return;
+    }
     [self.managedObjectContext deleteObject:deliv];
-    [self saveContext];
+    //[self saveContext];
 }
 
 
@@ -264,10 +267,6 @@ static ProjectManager *ourSharedInstance = nil;
 
 
 
-
-
-
-
 @end
 
 #pragma mark - Project additions
@@ -288,7 +287,7 @@ static ProjectManager *ourSharedInstance = nil;
 -(CALayer*) generateBallLayer {
     CAShapeLayer *ballLayer = [CAShapeLayer layer];
     CGFloat ballSize = [self.hoursToComplete doubleValue] * HOUR_TO_PT_RATIO;
-    printf("deliv ball size= %lf\n",ballSize);
+    //printf("deliv ball size= %lf\n",ballSize);
     ballLayer.bounds = CGRectMake(0, 0, ballSize, ballSize);
     ballLayer.opacity = 1.0;
     UIBezierPath *ballPath = [UIBezierPath bezierPathWithOvalInRect:ballLayer.bounds];
@@ -304,12 +303,12 @@ static ProjectManager *ourSharedInstance = nil;
 #define SECS_PER_DAY (24*60*60)
 
 
--(void) repositionBallLayerInRect:(CGRect)rect withScale:(double)scale {
+-(void) repositionInRect:(CGRect)rect withScale:(double)scale {
     CGPoint rawCoords = [self coordsForScale:scale];
     CGPoint transCoords = CGPointMake(rawCoords.x+(rect.size.width/2.0), rawCoords.y+(rect.size.height/2.0));
-    if (self.ballLayer.superlayer == nil) {
+    /*if (self.ballLayer.superlayer == nil) {
         printf("AAHHHHHH balllayer has no superlayer! WTF!\n");
-    }
+    } */
     self.ballLayer.position = transCoords;
 }
 
@@ -321,24 +320,11 @@ static ProjectManager *ourSharedInstance = nil;
     double due_date_dist = secs_til_due_date / SECS_PER_DAY;
     // fudge
     due_date_dist += (due_date_dist * 0.58);
-    //printf("due_date_dist= %lf\n",due_date_dist);
-    //due_date_dist += exp(due_date_dist*0.18)-1;
-    //printf("fudged due_date_dist= %lf\n",due_date_dist);
-    // scaled distance in radar rings (this is our hypotenuse)
     double scaled_due_dist = due_date_dist * scale;
-    //printf("scaled_due_dist= %lf\n",scaled_due_dist);
-    //scaled_due_dist = exp(scaled_due_dist*0.01)-1;
-    //scaled_due_dist += (0.5 * scaled_due_dist);
-    //printf("fudged scaled_due_dist: %lf\n", scaled_due_dist);
-    //double traject = [self.parentProj.trajectRadian doubleValue];
-    //printf("trajectory in degrees: %lf\n",(360*traject)/(2*M_PI));
     // adjacent
     double y_pos = -(cos([self.parentProj.trajectRadian doubleValue])*scaled_due_dist);
-    //printf("y pos: %lf\n",y_pos);
     // opposite
     double x_pos = sin([self.parentProj.trajectRadian doubleValue])*scaled_due_dist;
-    //printf("x pos: %lf\n",x_pos);
-    
     CGPoint pt = CGPointMake(x_pos, y_pos);
     
     return pt;
@@ -347,7 +333,5 @@ static ProjectManager *ourSharedInstance = nil;
 
 
 @end
-
-
 
 

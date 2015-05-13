@@ -14,7 +14,7 @@
 
 -(CALayer*) generateBallLayer;
 
--(void) repositionBallLayerInRect:(CGRect)rect withScale:(double)scale;
+-(void) repositionInRect:(CGRect)rect withScale:(double)scale;
 
 
 @end

@@ -36,7 +36,7 @@
     for (Deliverable *d in delivs) {
         d.ballLayer = [d generateBallLayer];
         [self.radarGrid.layer addSublayer:d.ballLayer];
-        [d repositionBallLayerInRect:self.radarGrid.bounds withScale:self.radarGrid.currentScale];
+        [d repositionInRect:self.radarGrid.bounds withScale:self.radarGrid.currentScale];
     }
 }
 
@@ -48,7 +48,7 @@
                            @{ SCALE_TEXT: @"3 Days", SCALE_VALUE: @(4.5) },
                            @{ SCALE_TEXT: @"7 Days", SCALE_VALUE: @(2.0) },
                            @{ SCALE_TEXT: @"14 Days",SCALE_VALUE: @(0.9) },
-                           @{ SCALE_TEXT: @"28 Days",SCALE_VALUE: @(0.45) }
+                           @{ SCALE_TEXT: @"1 Month",SCALE_VALUE: @(0.45) }
                            ];
 }
 
@@ -60,7 +60,7 @@
 - (IBAction)pinchGesture:(UIPinchGestureRecognizer *)sender {
     static BOOL pinchLock = NO;
     if (pinchLock == NO) {
-        NSLog(@"pinched! ouch! velocity = %lf",sender.velocity);
+        //NSLog(@"pinched! ouch! velocity = %lf",sender.velocity);
         if (sender.scale > 1.0) { // reduce radar screen
             //self.radarGrid.currentScale -= 0.1;
             self.current_scale_index--;
