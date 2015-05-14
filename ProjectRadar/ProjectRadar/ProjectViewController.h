@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface ProjectViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *projectNameField;
+@property (weak, nonatomic) IBOutlet UITextView *projDescField;
+@property (weak, nonatomic) IBOutlet UILabel *currentTrajectory;
+-(IBAction)trajectoryAdjusted:(UISlider *)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *colorToggleButton;
+- (IBAction)colorToggle:(id)sender;
 
 @end

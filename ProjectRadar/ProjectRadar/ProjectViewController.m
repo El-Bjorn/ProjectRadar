@@ -9,13 +9,27 @@
 #import "ProjectViewController.h"
 
 @interface ProjectViewController ()
-
+@property (nonatomic,strong) NSArray *projectColors;
 @end
+
+static int colorIndex = 0;
 
 @implementation ProjectViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.projectColors = @[ [UIColor redColor],
+                            [UIColor lightGrayColor],
+                            [UIColor purpleColor],
+                            [UIColor blueColor],
+                            [UIColor whiteColor],
+                            [UIColor yellowColor],
+                            [UIColor orangeColor],
+                            [UIColor cyanColor],
+                            [UIColor greenColor]
+                        ];
+    self.colorToggleButton.backgroundColor = self.projectColors[colorIndex];
     // Do any additional setup after loading the view.
 }
 
@@ -34,4 +48,15 @@
 }
 */
 
+- (IBAction)trajectoryAdjusted:(UISlider*)sender {
+    [self.projectNameField resignFirstResponder];
+    [self.projDescField resignFirstResponder];
+    self.currentTrajectory.text = [NSString stringWithFormat:@"%d",(int)sender.value];
+}
+- (IBAction)colorToggle:(id)sender {
+    colorIndex = (colorIndex+1) % self.projectColors.count;
+    self.colorToggleButton.backgroundColor = self.projectColors[colorIndex];
+    
+    NSLog(@"toggling color");
+}
 @end

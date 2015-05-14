@@ -29,15 +29,6 @@
     self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
     self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
     
-    
-    ProjectManager *pm = [ProjectManager sharedInstance];
-    
-/*    NSArray *delivs = [pm allDeliverables];
-    for (Deliverable *d in delivs) {
-        d.ballLayer = [d generateBallLayer];
-        [self.radarGrid.layer addSublayer:d.ballLayer];
-        [d repositionInRect:self.radarGrid.bounds withScale:self.radarGrid.currentScale];
-    } */
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -63,7 +54,8 @@
                            @{ SCALE_TEXT: @"3 Days", SCALE_VALUE: @(4.5) },
                            @{ SCALE_TEXT: @"7 Days", SCALE_VALUE: @(2.0) },
                            @{ SCALE_TEXT: @"14 Days",SCALE_VALUE: @(0.9) },
-                           @{ SCALE_TEXT: @"1 Month",SCALE_VALUE: @(0.45) }
+                           @{ SCALE_TEXT: @"1 Month",SCALE_VALUE: @(0.45) },
+                           @{ SCALE_TEXT: @"2 Months", SCALE_VALUE: @(0.225) }
                            ];
 }
 

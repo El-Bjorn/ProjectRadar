@@ -90,7 +90,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QjA-lR-BTf">
-                                <rect key="frame" x="36" y="599" width="68" height="30"/>
+                                <rect key="frame" x="16" y="599" width="68" height="30"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -99,7 +99,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3N-be-g3c">
-                                <rect key="frame" x="273" y="599" width="68" height="30"/>
+                                <rect key="frame" x="121" y="599" width="68" height="30"/>
                                 <state key="normal" title="Save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -164,6 +164,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riM-Kj-XTU">
+                                <rect key="frame" x="240" y="599" width="106" height="30"/>
+                                <state key="normal" title="New Project">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveDeliverable:" destination="zaA-tC-Hqh" eventType="touchUpInside" id="Obd-pp-Fe1"/>
+                                    <segue destination="aZ9-Qh-t7x" kind="presentation" id="G7N-Dt-eS4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -187,10 +197,10 @@
             </objects>
             <point key="canvasLocation" x="856.5" y="75.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Project View Controller-->
         <scene sceneID="jhg-pd-KTG">
             <objects>
-                <viewController id="aZ9-Qh-t7x" sceneMemberID="viewController">
+                <viewController id="aZ9-Qh-t7x" customClass="ProjectViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Jg-nn-Vws"/>
                         <viewControllerLayoutGuide type="bottom" id="Azn-Tr-oFG"/>
@@ -199,29 +209,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i7x-Oc-dDO">
-                                <rect key="frame" x="50" y="436" width="275" height="144"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6SO-8N-1VF">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Aza-xL-FqE">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="180" minValue="0.0" maxValue="360" translatesAutoresizingMaskIntoConstraints="NO" id="TY5-iN-tgm">
-                                <rect key="frame" x="102" y="352" width="171" height="31"/>
-                            </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Incoming Trajectory in Degrees:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhv-M0-6Wp">
                                 <rect key="frame" x="-7" y="323" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -239,12 +226,18 @@
                                 <state key="normal" title="Save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="zaA-tC-Hqh" kind="presentation" id="Zjo-9m-vhB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4B-PJ-aaG">
                                 <rect key="frame" x="25" y="602" width="68" height="30"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="zaA-tC-Hqh" kind="presentation" id="8AP-Fn-LbL"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Project Name" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IXP-Zb-5Dr">
                                 <rect key="frame" x="16" y="28" width="254" height="30"/>
@@ -264,11 +257,33 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdD-Y7-SpA">
+                                <rect key="frame" x="110" y="445" width="170" height="126"/>
+                                <color key="backgroundColor" red="0.98431378599999997" green="0.019607843829999999" blue="0.180392161" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Color Toggle">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="colorToggle:" destination="aZ9-Qh-t7x" eventType="touchUpInside" id="TBY-Oz-8y4"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="180" minValue="0.0" maxValue="360" translatesAutoresizingMaskIntoConstraints="NO" id="TY5-iN-tgm">
+                                <rect key="frame" x="35" y="353" width="301" height="31"/>
+                                <connections>
+                                    <action selector="trajectoryAdjusted:" destination="aZ9-Qh-t7x" eventType="valueChanged" id="9WD-g3-CNM"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="colorToggleButton" destination="gdD-Y7-SpA" id="kUB-RG-8g5"/>
+                        <outlet property="currentTrajectory" destination="9yn-ap-vk6" id="Y6o-Gw-3IA"/>
+                        <outlet property="projDescField" destination="Txm-3F-R7D" id="fxb-XH-6Qv"/>
+                        <outlet property="projectNameField" destination="IXP-Zb-5Dr" id="r5k-it-elf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBH-TV-lb1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -282,6 +297,7 @@
         <image name="radarBG" width="320" height="568"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Zjo-9m-vhB"/>
         <segue reference="Gm7-np-dRJ"/>
     </inferredMetricsTieBreakers>
 </document>
