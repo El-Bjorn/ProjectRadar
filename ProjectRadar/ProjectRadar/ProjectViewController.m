@@ -7,6 +7,7 @@
 //
 
 #import "ProjectViewController.h"
+#import "ProjectManager.h"
 
 @interface ProjectViewController ()
 @property (nonatomic,strong) NSArray *projectColors;
@@ -58,5 +59,11 @@ static int colorIndex = 0;
     self.colorToggleButton.backgroundColor = self.projectColors[colorIndex];
     
     NSLog(@"toggling color");
+}
+
+- (IBAction)saveProject:(id)sender {
+    NSLog(@"saving project: %@",self.projectNameField.text);
+    ProjectManager *pm = [ProjectManager sharedInstance];
+    [pm addProjectWithName:self.projectNameField.text andDesc:self.projDescField.text andColor:self.colorToggleButton.backgroundColor andTraject:RADIANS(self.trajectorySlider.value)];
 }
 @end

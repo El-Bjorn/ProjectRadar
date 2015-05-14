@@ -227,6 +227,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="saveProject:" destination="aZ9-Qh-t7x" eventType="touchUpInside" id="ght-TT-4hM"/>
                                     <segue destination="zaA-tC-Hqh" kind="presentation" id="Zjo-9m-vhB"/>
                                 </connections>
                             </button>
@@ -283,6 +284,7 @@
                         <outlet property="currentTrajectory" destination="9yn-ap-vk6" id="Y6o-Gw-3IA"/>
                         <outlet property="projDescField" destination="Txm-3F-R7D" id="fxb-XH-6Qv"/>
                         <outlet property="projectNameField" destination="IXP-Zb-5Dr" id="r5k-it-elf"/>
+                        <outlet property="trajectorySlider" destination="TY5-iN-tgm" id="t67-wv-87H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBH-TV-lb1" userLabel="First Responder" sceneMemberID="firstResponder"/>
