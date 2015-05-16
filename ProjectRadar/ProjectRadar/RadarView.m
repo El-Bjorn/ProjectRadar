@@ -37,10 +37,11 @@
     
     for (Deliverable *d in [pm allDeliverables]) {
         if (CGRectContainsPoint(CGRectInset(d.ballLayer.frame, TOUCHRECT_INSET, TOUCHRECT_INSET), location)) {
-            NSLog(@"deliv contains point");
+            NSLog(@"deliverable %@ contains point (%lf,%lf)",d,location.x,location.y);
             self.selectedDeliv = d;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:d.title message:@"Confirm delete?" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"delete",nil];
             [alert show];
+            break;
         }
        // if ([d.ballLayer.presentationLayer containsPoint:location]) {
         //    NSLog(@"deliv %@ contains point",d);

@@ -280,7 +280,7 @@ static ProjectManager *ourSharedInstance = nil;
 
 @implementation Deliverable (Additions)
 
-#define HOUR_TO_PT_RATIO 1.0
+#define HOUR_TO_PT_RATIO 1.2
 
 /*  Generated ball layer with correct size and trajectory (in unit square)
  *   position will be set later  */
@@ -302,14 +302,23 @@ static ProjectManager *ourSharedInstance = nil;
 
 #define SECS_PER_DAY (24*60*60)
 
-
 -(void) repositionInRect:(CGRect)rect withScale:(double)scale {
     CGPoint rawCoords = [self coordsForScale:scale];
+    CGPoint rectCenter = CGPointMake(rect.size.width/2.0, rect.size.height/2.0);
     CGPoint transCoords = CGPointMake(rawCoords.x+(rect.size.width/2.0), rawCoords.y+(rect.size.height/2.0));
     /*if (self.ballLayer.superlayer == nil) {
         printf("AAHHHHHH balllayer has no superlayer! WTF!\n");
     } */
     self.ballLayer.position = transCoords;
+    
+    // check if the ball is in the radar screen
+    CGFloat radarRadius = rect.size.width / 2.0; // width is as good as height
+    
+    if ( hypot(transCoords.x - rectCenter.x, transCoords.y - rectCenter.y) > radarRadius) {
+        self.ballLayer.hidden = YES;
+    } else {
+        self.ballLayer.hidden = NO;
+    }
 }
 
 

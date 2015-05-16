@@ -22,6 +22,8 @@
     self.projectSelector.dataSource = pm;
     self.projectSelector.delegate = pm;
     
+    self.dueDatePicker.datePickerMode = UIDatePickerModeDate;
+    
     // hours stepper
     self.hoursToComp.minimumValue = 0;
     self.hoursToComp.maximumValue = 80;
