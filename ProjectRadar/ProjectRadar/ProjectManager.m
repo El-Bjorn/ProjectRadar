@@ -109,6 +109,8 @@ static ProjectManager *ourSharedInstance = nil;
     NSError *err = nil;
     NSArray *projs = nil;
     NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:PROJ_ENTITY];
+    NSSortDescriptor *projNameSort = [[NSSortDescriptor alloc] initWithKey:@"projName" ascending:YES];
+    fetch.sortDescriptors = @[projNameSort];
     projs = [self.managedObjectContext executeFetchRequest:fetch error:&err];
     if (err) {
         NSLog(@"project fetch failed: %@",err);
@@ -328,7 +330,7 @@ static ProjectManager *ourSharedInstance = nil;
     // in days
     double due_date_dist = secs_til_due_date / SECS_PER_DAY;
     // fudge
-    due_date_dist += (due_date_dist * 0.58);
+    due_date_dist += (due_date_dist * 0.5);
     double scaled_due_dist = due_date_dist * scale;
     // adjacent
     double y_pos = -(cos([self.parentProj.trajectRadian doubleValue])*scaled_due_dist);

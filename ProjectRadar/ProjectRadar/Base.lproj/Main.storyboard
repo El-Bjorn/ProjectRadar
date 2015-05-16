@@ -170,7 +170,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="saveDeliverable:" destination="zaA-tC-Hqh" eventType="touchUpInside" id="Obd-pp-Fe1"/>
                                     <segue destination="aZ9-Qh-t7x" kind="presentation" id="G7N-Dt-eS4"/>
                                 </connections>
                             </button>

@@ -11,8 +11,11 @@
 
 @interface RadarView ()
 @property (nonatomic,weak) Deliverable *selectedDeliv;
-
 @end
+
+/*#pragma mark - utility functions
+UIBezierPath *trajMarkerPath(UIColor *color);
+CGPoint markerPosition(double traj, CGPoint center, double dist); */
 
 @implementation RadarView 
 
@@ -66,6 +69,16 @@
 }
 
 
+#pragma mark - May I present...drawRect
+
+#define MARKER_SIZE 20.0
+
+/*-(void) drawProjMarkers {
+    ProjectManager *pm = [ProjectManager sharedInstance];
+    
+    
+} */
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
@@ -77,7 +90,9 @@
     for (Deliverable *d in delivs) {
         [d repositionInRect:self.bounds withScale:self.currentScale];
     }
+    
 }
 
 
 @end
+
