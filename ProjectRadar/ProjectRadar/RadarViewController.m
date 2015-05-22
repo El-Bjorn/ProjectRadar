@@ -65,7 +65,7 @@ void transformForTraj(CALayer *lay, double traj);
         
         markerLayer.position = markerPosition([p.trajectRadian doubleValue],
                                               CGPointMake(rect.size.width/2.0, rect.size.height/2.0),
-                                              rect.size.width/2.0);
+                                              rect.size.width/2.0-5);
         transformForTraj(markerLayer, [p.trajectRadian doubleValue]);
         
         [self.radarGrid.layer addSublayer:markerLayer];

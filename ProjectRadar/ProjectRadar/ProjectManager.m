@@ -10,11 +10,18 @@
 #import "Project+Additions.h"
 #import "Deliverable+Additions.h"
 
+#define SQLITE_STORE_FILE @"ProjRadar.sqlite"
+#define ICLOUD_STORE_FILE @"iCloud_ProjRadar.sqlite"
+#define UBIQUITY_KEY @"ProjectRadar"
+
 static ProjectManager *ourSharedInstance = nil;
 
 @interface ProjectManager ()
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readonly, strong, nonatomic) NSPersistentStore *persistentStore;
+@property (readonly, strong, nonatomic) NSPersistentStore *iCloudStore;
+
 @end
 
 
@@ -193,20 +200,56 @@ static ProjectManager *ourSharedInstance = nil;
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ProjectRadar.sqlite"];
-    NSError *error = nil;
-    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    
+    // setup sqlite store
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:SQLITE_STORE_FILE];
+    NSError *err = nil;
+    /*_persistentStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                                 configuration:nil URL:storeURL
+                                                                       options:nil error:&err];
+    if (self.persistentStore == nil) {
+        NSLog(@"persistent store init failure: %@", err);
+    } */
+
+    // setup cloudkit store
+    NSDictionary *options = @{ NSMigratePersistentStoresAutomaticallyOption: @YES,
+                              NSInferMappingModelAutomaticallyOption: @YES,
+                              NSPersistentStoreUbiquitousContentNameKey: UBIQUITY_KEY
+                              };
+    
+    storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ProjectRadar-iCloud.sqlite"];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSURL *cloudURL = [fm URLForUbiquityContainerIdentifier:nil];
+    NSLog(@"cloud URL = %@",cloudURL);
+    
+
+    _iCloudStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                                 configuration:nil URL:storeURL
+                                                                       options:options error:&err];
+    if (self.iCloudStore){
+        NSLog(@"cloud store configured at: %@",self.iCloudStore.URL.path);
+    }
+    if (self.iCloudStore == nil) {
+        NSLog(@"cloud error: %@",err);
         // Report any error we got.
+       /* NSString *failureReason = @"There was an error creating or loading the application's saved data.";
+
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
         dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+        dict[NSUnderlyingErrorKey] = err;
+        err = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
         // Replace this with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+        NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
+        abort(); */
+    } else {
+        NSLog(@"cloud support added");
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSURL *cloudURL = [fm URLForUbiquityContainerIdentifier:UBIQUITY_KEY];
+        NSLog(@"cloudURL = %@", cloudURL);
+        id cloudToken = fm.ubiquityIdentityToken;
+        NSLog(@"cloudToken = %@", cloudToken);
     }
     
     return _persistentStoreCoordinator;
