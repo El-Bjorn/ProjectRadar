@@ -27,7 +27,6 @@ void transformForTraj(CALayer *lay, double traj);
 #define SCALE_TEXT  @"scaleText"
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.current_scale_index = 2;
@@ -70,8 +69,6 @@ void transformForTraj(CALayer *lay, double traj);
         
         [self.radarGrid.layer addSublayer:markerLayer];
     }
-
-
     
 }
 
