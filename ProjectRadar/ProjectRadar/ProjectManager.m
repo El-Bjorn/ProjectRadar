@@ -347,6 +347,7 @@ static ProjectManager *ourSharedInstance = nil;
 
 #define HOUR_TO_PT_RATIO 1.5
 #define MIN_BALL_SIZE 3.0   // 'cause it's bad if you can't see them
+#define MAX_BALL_SIZE 50.0  // a "death star" isn't useful
 
 /*  Generated ball layer with correct size and trajectory (in unit square)
  *   position will be set later  */
@@ -356,6 +357,9 @@ static ProjectManager *ourSharedInstance = nil;
     printf("ball size: %lf\n",ballSize);
     if (ballSize < MIN_BALL_SIZE) {
         ballSize = MIN_BALL_SIZE;
+    }
+    if (ballSize > MAX_BALL_SIZE) {
+        ballSize = MAX_BALL_SIZE;
     }
     //printf("deliv ball size= %lf\n",ballSize);
     ballLayer.bounds = CGRectMake(0, 0, ballSize, ballSize);
