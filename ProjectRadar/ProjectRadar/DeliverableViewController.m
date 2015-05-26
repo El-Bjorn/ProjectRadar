@@ -23,6 +23,7 @@
     self.projectSelector.delegate = pm;
     
     self.dueDatePicker.datePickerMode = UIDatePickerModeDate;
+    [self.dueDatePicker setMinimumDate:[NSDate date]];
     
     // hours stepper
     self.hoursToComp.minimumValue = 0;
