@@ -109,7 +109,7 @@ void transformForTraj(CALayer *lay, double traj);
         }
         self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
         self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
-        printf("current grid scale: %lf\n",self.radarGrid.currentScale);
+        //printf("current grid scale: %lf\n",self.radarGrid.currentScale);
         // disable for a moment
         //NSLog(@"disabling pinch");
         //sender.enabled = NO;
@@ -127,6 +127,7 @@ void transformForTraj(CALayer *lay, double traj);
 
 }
 
+// disabled
 - (IBAction)tappedRadar:(UITapGestureRecognizer *)sender {
     self.current_scale_index = (self.current_scale_index+1)%self.scalingTable.count;
     NSLog(@"got tap");
@@ -166,31 +167,14 @@ UIBezierPath *trajMarkerPath(UIColor *fillColor) {
     
     //// Bezier Drawing
     UIBezierPath* bezierPath = UIBezierPath.bezierPath;
-    //[bezierPath moveToPoint: CGPointMake(38.93, 96.76)];
     [bezierPath moveToPoint: CGPointMake(0.0, 19.78)];
-    
-    //[bezierPath addCurveToPoint: CGPointMake(46.9, 96.64) controlPoint1: CGPointMake(41.1, 96.69) controlPoint2: CGPointMake(43.84, 96.64)];
     [bezierPath addCurveToPoint: CGPointMake(7.97, 19.66) controlPoint1: CGPointMake(2.17, 19.71) controlPoint2: CGPointMake(4.91, 19.66)];
-    
-    //[bezierPath addCurveToPoint: CGPointMake(54.88, 96.76) controlPoint1: CGPointMake(49.96, 96.64) controlPoint2: CGPointMake(52.7, 96.69)];
     [bezierPath addCurveToPoint: CGPointMake(15.95, 19.78) controlPoint1: CGPointMake(11.03, 19.66) controlPoint2: CGPointMake(13.77, 19.71)];
-    
-    //[bezierPath addLineToPoint: CGPointMake(54.88, 76.98)];
     [bezierPath addLineToPoint: CGPointMake(15.95, 0)];
-    
-    //[bezierPath addLineToPoint: CGPointMake(46.9, 82.14)];
     [bezierPath addLineToPoint: CGPointMake(7.97, 5.16)];
-    
-    //[bezierPath addLineToPoint: CGPointMake(38.93, 76.98)];
     [bezierPath addLineToPoint: CGPointMake(0, 0)];
-    
-    
-    //[bezierPath addLineToPoint: CGPointMake(38.93, 96.76)];
     [bezierPath addLineToPoint: CGPointMake(0, 19.78)];
-    
     [bezierPath closePath];
-    //[fillColor setFill];
-    //[bezierPath fill];
     
     return bezierPath;
     
