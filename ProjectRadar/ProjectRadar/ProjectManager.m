@@ -345,7 +345,7 @@ static ProjectManager *ourSharedInstance = nil;
 
 @implementation Deliverable (Additions)
 
-#define HOUR_TO_PT_RATIO 1.2
+#define HOUR_TO_PT_RATIO 1.5
 
 /*  Generated ball layer with correct size and trajectory (in unit square)
  *   position will be set later  */
