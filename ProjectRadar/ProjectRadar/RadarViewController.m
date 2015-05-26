@@ -189,8 +189,8 @@ UIBezierPath *trajMarkerPath(UIColor *fillColor) {
     [bezierPath addLineToPoint: CGPointMake(0, 19.78)];
     
     [bezierPath closePath];
-    [fillColor setFill];
-    [bezierPath fill];
+    //[fillColor setFill];
+    //[bezierPath fill];
     
     return bezierPath;
     
