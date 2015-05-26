@@ -15,7 +15,10 @@
 - (IBAction)tappedRadar:(UITapGestureRecognizer *)sender;
 
 @property (nonatomic,weak) IBOutlet RadarView *radarGrid;
+
 @property (weak, nonatomic) IBOutlet UILabel *scaleLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *currentDateRange;
 
 @end
 

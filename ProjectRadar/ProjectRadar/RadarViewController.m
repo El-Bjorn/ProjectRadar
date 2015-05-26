@@ -25,7 +25,7 @@ void transformForTraj(CALayer *lay, double traj);
 
 #define SCALE_VALUE @"scaleValue"
 #define SCALE_TEXT  @"scaleText"
-
+#define SCALE_RANGE @"scaleRange" // how many days out are on the radar screen
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,6 +33,8 @@ void transformForTraj(CALayer *lay, double traj);
     [self setupScalingTable];
     self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
     self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
+    
+    [self setDateRangeString];
     
 }
 
@@ -72,16 +74,29 @@ void transformForTraj(CALayer *lay, double traj);
     
 }
 
+-(void) setDateRangeString {
+    NSDateFormatter  *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSDate *currDate = [NSDate date];
+    NSString *currDateString = [dateFormat stringFromDate:currDate];
+    double num_days = [self.scalingTable[self.current_scale_index][SCALE_RANGE] doubleValue];
+    NSDate *outerRingDate = [currDate dateByAddingTimeInterval:60*60*24*num_days];
+    NSString *outerDateString = [dateFormat stringFromDate:outerRingDate];
+    
+    //self.currentDateRange.text = [NSString stringWithFormat:@"%@ - %@",currDateString,outerDateString];
+    self.currentDateRange.text = [NSString stringWithFormat:@"Deliverables through %@",outerDateString];
+}
+
 -(void) setupScalingTable {
-    self.scalingTable = @[ @{SCALE_TEXT: @"6 hours", SCALE_VALUE: @(60.0)},
-                           @{SCALE_TEXT: @"12 hours", SCALE_VALUE: @(30.0)},
-                           @{ SCALE_TEXT: @"1 Day", SCALE_VALUE: @(15.0) },
-                           @{ SCALE_TEXT: @"2 Days", SCALE_VALUE: @(7.2) },
-                           @{ SCALE_TEXT: @"3 Days", SCALE_VALUE: @(4.5) },
-                           @{ SCALE_TEXT: @"7 Days", SCALE_VALUE: @(2.0) },
-                           @{ SCALE_TEXT: @"14 Days",SCALE_VALUE: @(0.9) },
-                           @{ SCALE_TEXT: @"1 Month",SCALE_VALUE: @(0.45) },
-                           @{ SCALE_TEXT: @"2 Months", SCALE_VALUE: @(0.225) }
+    self.scalingTable = @[ @{SCALE_TEXT: @"6 hours", SCALE_VALUE: @(60.0), SCALE_RANGE: @(2) },
+                           @{SCALE_TEXT: @"12 hours", SCALE_VALUE: @(30.0), SCALE_RANGE: @(4) },
+                           @{ SCALE_TEXT: @"1 Day", SCALE_VALUE: @(15.0), SCALE_RANGE: @(7) },
+                           @{ SCALE_TEXT: @"2 Days", SCALE_VALUE: @(7.2), SCALE_RANGE: @(14) },
+                           @{ SCALE_TEXT: @"3 Days", SCALE_VALUE: @(4.5), SCALE_RANGE: @(21) },
+                           @{ SCALE_TEXT: @"7 Days", SCALE_VALUE: @(2.0), SCALE_RANGE: @(49) },
+                           @{ SCALE_TEXT: @"14 Days",SCALE_VALUE: @(0.9), SCALE_RANGE: @(98) },
+                           @{ SCALE_TEXT: @"1 Month",SCALE_VALUE: @(0.45), SCALE_RANGE: @(196) },
+                           @{ SCALE_TEXT: @"2 Months", SCALE_VALUE: @(0.225), SCALE_RANGE: @(392) }
                            ];
 }
 
@@ -109,10 +124,9 @@ void transformForTraj(CALayer *lay, double traj);
         }
         self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
         self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
-        //printf("current grid scale: %lf\n",self.radarGrid.currentScale);
-        // disable for a moment
-        //NSLog(@"disabling pinch");
-        //sender.enabled = NO;
+        
+        [self setDateRangeString];
+        
         pinchLock = YES;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //NSLog(@"reenabling pinch");
