@@ -231,18 +231,6 @@ static ProjectManager *ourSharedInstance = nil;
     }
     if (self.iCloudStore == nil) {
         NSLog(@"cloud error: %@",err);
-        // Report any error we got.
-       /* NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey] = err;
-        err = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        // Replace this with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
-        abort(); */
     } else {
         NSLog(@"cloud support added");
         NSFileManager *fm = [NSFileManager defaultManager];
@@ -251,6 +239,8 @@ static ProjectManager *ourSharedInstance = nil;
         id cloudToken = fm.ubiquityIdentityToken;
         NSLog(@"cloudToken = %@", cloudToken);
     }
+    
+    [self registerForStoreChangeNotifs];
     
     return _persistentStoreCoordinator;
 }
@@ -269,6 +259,36 @@ static ProjectManager *ourSharedInstance = nil;
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
+}
+
+#pragma mark - iCloud notifs
+
+-(void) registerForStoreChangeNotifs {
+    NSNotificationCenter *ns = [NSNotificationCenter defaultCenter];
+    // will change
+    [ns addObserver:self selector:@selector(storeWillChange:)
+               name:NSPersistentStoreCoordinatorStoresWillChangeNotification
+             object:self.persistentStoreCoordinator];
+    // did change
+    [ns addObserver:self selector:@selector(storeDidChange:)
+               name:NSPersistentStoreCoordinatorStoresDidChangeNotification
+             object:self.persistentStoreCoordinator];
+    // imported cloudy stuff
+    [ns addObserver:self selector:@selector(didImport_iCloudChanges:)
+               name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+            object:self.persistentStoreCoordinator];
+
+}
+
+-(void) storeWillChange:(NSNotification*)notif {
+    NSLog(@"Core data will change++++++++++++++++++++++++++++++++++++++++++++");
+    
+}
+-(void) storeDidChange:(NSNotification*)notif {
+    NSLog(@"core data did change++++++++++++++++++++++++++++++++++++++++++++++");
+}
+-(void) didImport_iCloudChanges:(NSNotification*)notif {
+    NSLog(@"got cloudy shit++++++++++++++++++++++++++++++++++++++++++++++++++++");
 }
 
 #pragma mark - Core Data Saving support
