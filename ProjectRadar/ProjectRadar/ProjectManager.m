@@ -346,12 +346,17 @@ static ProjectManager *ourSharedInstance = nil;
 @implementation Deliverable (Additions)
 
 #define HOUR_TO_PT_RATIO 1.5
+#define MIN_BALL_SIZE 3.0   // 'cause it's bad if you can't see them
 
 /*  Generated ball layer with correct size and trajectory (in unit square)
  *   position will be set later  */
 -(CALayer*) generateBallLayer {
     CAShapeLayer *ballLayer = [CAShapeLayer layer];
     CGFloat ballSize = [self.hoursToComplete doubleValue] * HOUR_TO_PT_RATIO;
+    printf("ball size: %lf\n",ballSize);
+    if (ballSize < MIN_BALL_SIZE) {
+        ballSize = MIN_BALL_SIZE;
+    }
     //printf("deliv ball size= %lf\n",ballSize);
     ballLayer.bounds = CGRectMake(0, 0, ballSize, ballSize);
     ballLayer.opacity = 1.0;
