@@ -346,7 +346,7 @@ static ProjectManager *ourSharedInstance = nil;
 @implementation Deliverable (Additions)
 
 #define HOUR_TO_PT_RATIO 1.5
-#define MIN_BALL_SIZE 3.0   // 'cause it's bad if you can't see them
+#define MIN_BALL_SIZE 5.0   // 'cause it's bad if you can't see them
 #define MAX_BALL_SIZE 50.0  // a "death star" isn't useful
 
 /*  Generated ball layer with correct size and trajectory (in unit square)
