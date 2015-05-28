@@ -10,11 +10,18 @@
 #import "Project+Additions.h"
 #import "Deliverable+Additions.h"
 
+#define SQLITE_STORE_FILE @"ProjRadar.sqlite"
+#define ICLOUD_STORE_FILE @"iCloud_ProjRadar.sqlite"
+#define UBIQUITY_KEY @"ProjectRadar"
+
 static ProjectManager *ourSharedInstance = nil;
 
 @interface ProjectManager ()
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readonly, strong, nonatomic) NSPersistentStore *persistentStore;
+@property (readonly, strong, nonatomic) NSPersistentStore *iCloudStore;
+
 @end
 
 
@@ -193,21 +200,47 @@ static ProjectManager *ourSharedInstance = nil;
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ProjectRadar.sqlite"];
-    NSError *error = nil;
-    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        // Report any error we got.
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        // Replace this with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+    
+    // setup sqlite store
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:SQLITE_STORE_FILE];
+    NSError *err = nil;
+    /*_persistentStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                                 configuration:nil URL:storeURL
+                                                                       options:nil error:&err];
+    if (self.persistentStore == nil) {
+        NSLog(@"persistent store init failure: %@", err);
+    } */
+
+    // setup cloudkit store
+    NSDictionary *options = @{ NSMigratePersistentStoresAutomaticallyOption: @YES,
+                              NSInferMappingModelAutomaticallyOption: @YES,
+                              NSPersistentStoreUbiquitousContentNameKey: UBIQUITY_KEY
+                              };
+    
+    storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ProjectRadar-iCloud.sqlite"];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSURL *cloudURL = [fm URLForUbiquityContainerIdentifier:nil];
+    NSLog(@"cloud URL = %@",cloudURL);
+    
+
+    _iCloudStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                                 configuration:nil URL:storeURL
+                                                                       options:options error:&err];
+    if (self.iCloudStore){
+        NSLog(@"cloud store configured at: %@",self.iCloudStore.URL.path);
     }
+    if (self.iCloudStore == nil) {
+        NSLog(@"cloud error: %@",err);
+    } else {
+        NSLog(@"cloud support added");
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSURL *cloudURL = [fm URLForUbiquityContainerIdentifier:UBIQUITY_KEY];
+        NSLog(@"cloudURL = %@", cloudURL);
+        id cloudToken = fm.ubiquityIdentityToken;
+        NSLog(@"cloudToken = %@", cloudToken);
+    }
+    
+    [self registerForStoreChangeNotifs];
     
     return _persistentStoreCoordinator;
 }
@@ -226,6 +259,36 @@ static ProjectManager *ourSharedInstance = nil;
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
+}
+
+#pragma mark - iCloud notifs
+
+-(void) registerForStoreChangeNotifs {
+    NSNotificationCenter *ns = [NSNotificationCenter defaultCenter];
+    // will change
+    [ns addObserver:self selector:@selector(storeWillChange:)
+               name:NSPersistentStoreCoordinatorStoresWillChangeNotification
+             object:self.persistentStoreCoordinator];
+    // did change
+    [ns addObserver:self selector:@selector(storeDidChange:)
+               name:NSPersistentStoreCoordinatorStoresDidChangeNotification
+             object:self.persistentStoreCoordinator];
+    // imported cloudy stuff
+    [ns addObserver:self selector:@selector(didImport_iCloudChanges:)
+               name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+            object:self.persistentStoreCoordinator];
+
+}
+
+-(void) storeWillChange:(NSNotification*)notif {
+    NSLog(@"Core data will change++++++++++++++++++++++++++++++++++++++++++++");
+    
+}
+-(void) storeDidChange:(NSNotification*)notif {
+    NSLog(@"core data did change++++++++++++++++++++++++++++++++++++++++++++++");
+}
+-(void) didImport_iCloudChanges:(NSNotification*)notif {
+    NSLog(@"got cloudy shit++++++++++++++++++++++++++++++++++++++++++++++++++++");
 }
 
 #pragma mark - Core Data Saving support
@@ -282,13 +345,22 @@ static ProjectManager *ourSharedInstance = nil;
 
 @implementation Deliverable (Additions)
 
-#define HOUR_TO_PT_RATIO 1.2
+#define HOUR_TO_PT_RATIO 1.5
+#define MIN_BALL_SIZE 5.0   // 'cause it's bad if you can't see them
+#define MAX_BALL_SIZE 50.0  // a "death star" isn't useful
 
 /*  Generated ball layer with correct size and trajectory (in unit square)
  *   position will be set later  */
 -(CALayer*) generateBallLayer {
     CAShapeLayer *ballLayer = [CAShapeLayer layer];
     CGFloat ballSize = [self.hoursToComplete doubleValue] * HOUR_TO_PT_RATIO;
+    printf("ball size: %lf\n",ballSize);
+    if (ballSize < MIN_BALL_SIZE) {
+        ballSize = MIN_BALL_SIZE;
+    }
+    if (ballSize > MAX_BALL_SIZE) {
+        ballSize = MAX_BALL_SIZE;
+    }
     //printf("deliv ball size= %lf\n",ballSize);
     ballLayer.bounds = CGRectMake(0, 0, ballSize, ballSize);
     ballLayer.opacity = 1.0;

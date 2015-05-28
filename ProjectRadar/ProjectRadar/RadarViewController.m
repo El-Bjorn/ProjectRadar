@@ -25,8 +25,7 @@ void transformForTraj(CALayer *lay, double traj);
 
 #define SCALE_VALUE @"scaleValue"
 #define SCALE_TEXT  @"scaleText"
-
-
+#define SCALE_RANGE @"scaleRange" // how many days out are on the radar screen
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,6 +33,8 @@ void transformForTraj(CALayer *lay, double traj);
     [self setupScalingTable];
     self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
     self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
+    
+    [self setDateRangeString];
     
 }
 
@@ -65,26 +66,37 @@ void transformForTraj(CALayer *lay, double traj);
         
         markerLayer.position = markerPosition([p.trajectRadian doubleValue],
                                               CGPointMake(rect.size.width/2.0, rect.size.height/2.0),
-                                              rect.size.width/2.0);
+                                              rect.size.width/2.0-5);
         transformForTraj(markerLayer, [p.trajectRadian doubleValue]);
         
         [self.radarGrid.layer addSublayer:markerLayer];
     }
-
-
     
 }
 
+-(void) setDateRangeString {
+    NSDateFormatter  *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSDate *currDate = [NSDate date];
+    NSString *currDateString = [dateFormat stringFromDate:currDate];
+    double num_days = [self.scalingTable[self.current_scale_index][SCALE_RANGE] doubleValue];
+    NSDate *outerRingDate = [currDate dateByAddingTimeInterval:60*60*24*num_days];
+    NSString *outerDateString = [dateFormat stringFromDate:outerRingDate];
+    
+    //self.currentDateRange.text = [NSString stringWithFormat:@"%@ - %@",currDateString,outerDateString];
+    self.currentDateRange.text = [NSString stringWithFormat:@"Deliverables through %@",outerDateString];
+}
+
 -(void) setupScalingTable {
-    self.scalingTable = @[ @{SCALE_TEXT: @"6 hours", SCALE_VALUE: @(60.0)},
-                           @{SCALE_TEXT: @"12 hours", SCALE_VALUE: @(30.0)},
-                           @{ SCALE_TEXT: @"1 Day", SCALE_VALUE: @(15.0) },
-                           @{ SCALE_TEXT: @"2 Days", SCALE_VALUE: @(7.2) },
-                           @{ SCALE_TEXT: @"3 Days", SCALE_VALUE: @(4.5) },
-                           @{ SCALE_TEXT: @"7 Days", SCALE_VALUE: @(2.0) },
-                           @{ SCALE_TEXT: @"14 Days",SCALE_VALUE: @(0.9) },
-                           @{ SCALE_TEXT: @"1 Month",SCALE_VALUE: @(0.45) },
-                           @{ SCALE_TEXT: @"2 Months", SCALE_VALUE: @(0.225) }
+    self.scalingTable = @[ @{SCALE_TEXT: @"6 hours", SCALE_VALUE: @(60.0), SCALE_RANGE: @(2) },
+                           @{SCALE_TEXT: @"12 hours", SCALE_VALUE: @(30.0), SCALE_RANGE: @(4) },
+                           @{ SCALE_TEXT: @"1 Day", SCALE_VALUE: @(15.0), SCALE_RANGE: @(7) },
+                           @{ SCALE_TEXT: @"2 Days", SCALE_VALUE: @(7.2), SCALE_RANGE: @(14) },
+                           @{ SCALE_TEXT: @"3 Days", SCALE_VALUE: @(4.5), SCALE_RANGE: @(21) },
+                           @{ SCALE_TEXT: @"7 Days", SCALE_VALUE: @(2.0), SCALE_RANGE: @(49) },
+                           @{ SCALE_TEXT: @"14 Days",SCALE_VALUE: @(0.9), SCALE_RANGE: @(98) },
+                           @{ SCALE_TEXT: @"1 Month",SCALE_VALUE: @(0.45), SCALE_RANGE: @(196) },
+                           @{ SCALE_TEXT: @"2 Months", SCALE_VALUE: @(0.225), SCALE_RANGE: @(392) }
                            ];
 }
 
@@ -112,10 +124,9 @@ void transformForTraj(CALayer *lay, double traj);
         }
         self.radarGrid.currentScale = [self.scalingTable[self.current_scale_index][SCALE_VALUE] doubleValue];
         self.scaleLabel.text = self.scalingTable[self.current_scale_index][SCALE_TEXT];
-        printf("current grid scale: %lf\n",self.radarGrid.currentScale);
-        // disable for a moment
-        //NSLog(@"disabling pinch");
-        //sender.enabled = NO;
+        
+        [self setDateRangeString];
+        
         pinchLock = YES;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //NSLog(@"reenabling pinch");
@@ -130,6 +141,7 @@ void transformForTraj(CALayer *lay, double traj);
 
 }
 
+// disabled
 - (IBAction)tappedRadar:(UITapGestureRecognizer *)sender {
     self.current_scale_index = (self.current_scale_index+1)%self.scalingTable.count;
     NSLog(@"got tap");
@@ -169,31 +181,14 @@ UIBezierPath *trajMarkerPath(UIColor *fillColor) {
     
     //// Bezier Drawing
     UIBezierPath* bezierPath = UIBezierPath.bezierPath;
-    //[bezierPath moveToPoint: CGPointMake(38.93, 96.76)];
     [bezierPath moveToPoint: CGPointMake(0.0, 19.78)];
-    
-    //[bezierPath addCurveToPoint: CGPointMake(46.9, 96.64) controlPoint1: CGPointMake(41.1, 96.69) controlPoint2: CGPointMake(43.84, 96.64)];
     [bezierPath addCurveToPoint: CGPointMake(7.97, 19.66) controlPoint1: CGPointMake(2.17, 19.71) controlPoint2: CGPointMake(4.91, 19.66)];
-    
-    //[bezierPath addCurveToPoint: CGPointMake(54.88, 96.76) controlPoint1: CGPointMake(49.96, 96.64) controlPoint2: CGPointMake(52.7, 96.69)];
     [bezierPath addCurveToPoint: CGPointMake(15.95, 19.78) controlPoint1: CGPointMake(11.03, 19.66) controlPoint2: CGPointMake(13.77, 19.71)];
-    
-    //[bezierPath addLineToPoint: CGPointMake(54.88, 76.98)];
     [bezierPath addLineToPoint: CGPointMake(15.95, 0)];
-    
-    //[bezierPath addLineToPoint: CGPointMake(46.9, 82.14)];
     [bezierPath addLineToPoint: CGPointMake(7.97, 5.16)];
-    
-    //[bezierPath addLineToPoint: CGPointMake(38.93, 76.98)];
     [bezierPath addLineToPoint: CGPointMake(0, 0)];
-    
-    
-    //[bezierPath addLineToPoint: CGPointMake(38.93, 96.76)];
     [bezierPath addLineToPoint: CGPointMake(0, 19.78)];
-    
     [bezierPath closePath];
-    [fillColor setFill];
-    [bezierPath fill];
     
     return bezierPath;
     

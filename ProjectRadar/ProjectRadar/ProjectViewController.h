@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ProjectViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UITextField *projectNameField;
 @property (weak, nonatomic) IBOutlet UITextView *projDescField;
 @property (weak, nonatomic) IBOutlet UILabel *currentTrajectory;

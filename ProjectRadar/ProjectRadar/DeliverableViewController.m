@@ -22,7 +22,12 @@
     self.projectSelector.dataSource = pm;
     self.projectSelector.delegate = pm;
     
+    // due dates have day granularity
     self.dueDatePicker.datePickerMode = UIDatePickerModeDate;
+    
+    // can't add a deliverable due before tomorrow
+    NSDate *minDate = [[NSDate date] dateByAddingTimeInterval:60*60*24];
+    [self.dueDatePicker setMinimumDate:minDate];
     
     // hours stepper
     self.hoursToComp.minimumValue = 0;

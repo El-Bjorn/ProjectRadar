@@ -42,7 +42,8 @@ CGPoint markerPosition(double traj, CGPoint center, double dist); */
         if (CGRectContainsPoint(CGRectInset(d.ballLayer.frame, TOUCHRECT_INSET, TOUCHRECT_INSET), location)) {
             NSLog(@"deliverable %@ contains point (%lf,%lf)",d,location.x,location.y);
             self.selectedDeliv = d;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:d.title message:@"Confirm delete?" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"delete",nil];
+            NSString *hrsStr = [NSString stringWithFormat:@"%@ hours",d.hoursToComplete];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:d.title message:hrsStr delegate:self cancelButtonTitle:@"ok" otherButtonTitles:@"delete",nil];
             [alert show];
             break;
         }

@@ -18,6 +18,7 @@
 		405622701AD8A1C700838108 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 4056226E1AD8A1C700838108 /* Project.m */; };
 		405622791AD8AC6800838108 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622781AD8AC6800838108 /* ProjectManager.m */; };
 		4056227A1AD8AC6800838108 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622781AD8AC6800838108 /* ProjectManager.m */; };
+		4099B5961B0EDAD700697C7C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4099B5951B0EDAD700697C7C /* CloudKit.framework */; };
 		40B0030D1AF09A5B00A62753 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B0030C1AF09A5B00A62753 /* CoreGraphics.framework */; };
 		40D41F0F1AF8228D00F8CED8 /* DeliverableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D41F0E1AF8228D00F8CED8 /* DeliverableViewController.m */; };
 		40D41F101AF8228D00F8CED8 /* DeliverableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D41F0E1AF8228D00F8CED8 /* DeliverableViewController.m */; };
@@ -61,6 +62,8 @@
 		405622781AD8AC6800838108 /* ProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectManager.m; sourceTree = "<group>"; };
 		4056227D1AD9BA6300838108 /* Deliverable+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Deliverable+Additions.h"; sourceTree = "<group>"; };
 		4056227E1AD9BA8400838108 /* Project+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project+Additions.h"; sourceTree = "<group>"; };
+		4099B5941B0EDACC00697C7C /* ProjectRadar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ProjectRadar.entitlements; sourceTree = "<group>"; };
+		4099B5951B0EDAD700697C7C /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		40B0030C1AF09A5B00A62753 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		40D41F0D1AF8228D00F8CED8 /* DeliverableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliverableViewController.h; sourceTree = "<group>"; };
 		40D41F0E1AF8228D00F8CED8 /* DeliverableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliverableViewController.m; sourceTree = "<group>"; };
@@ -79,6 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40B0030D1AF09A5B00A62753 /* CoreGraphics.framework in Frameworks */,
+				4099B5961B0EDAD700697C7C /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +119,7 @@
 		405622421AD89FCF00838108 /* ProjectRadar */ = {
 			isa = PBXGroup;
 			children = (
+				4099B5941B0EDACC00697C7C /* ProjectRadar.entitlements */,
 				405622471AD89FCF00838108 /* AppDelegate.h */,
 				405622481AD89FCF00838108 /* AppDelegate.m */,
 				405622751AD8A1F400838108 /* radar view */,
@@ -210,6 +215,7 @@
 		40D41F151AF9693300F8CED8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4099B5951B0EDAD700697C7C /* CloudKit.framework */,
 				40B0030C1AF09A5B00A62753 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
@@ -264,6 +270,12 @@
 				TargetAttributes = {
 					4056223F1AD89FCF00838108 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 58CQP95QD3;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					4056225B1AD89FD000838108 = {
 						CreatedOnToolsVersion = 6.2;
@@ -453,9 +465,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ProjectRadar/ProjectRadar.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ProjectRadar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -463,9 +479,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ProjectRadar/ProjectRadar.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ProjectRadar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
