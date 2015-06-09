@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40378AF81B268A3300E4CEF1 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 40378AF71B268A3300E4CEF1 /* Project.m */; };
+		40378AF91B268A3300E4CEF1 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 40378AF71B268A3300E4CEF1 /* Project.m */; };
 		405622461AD89FCF00838108 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622451AD89FCF00838108 /* main.m */; };
 		405622491AD89FCF00838108 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622481AD89FCF00838108 /* AppDelegate.m */; };
 		4056224C1AD89FCF00838108 /* ProjectRadar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4056224A1AD89FCF00838108 /* ProjectRadar.xcdatamodeld */; };
@@ -14,8 +16,6 @@
 		405622521AD89FCF00838108 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 405622501AD89FCF00838108 /* Main.storyboard */; };
 		405622571AD89FCF00838108 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 405622551AD89FCF00838108 /* LaunchScreen.xib */; };
 		405622631AD89FD000838108 /* ProjectRadarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622621AD89FD000838108 /* ProjectRadarTests.m */; };
-		4056226F1AD8A1C700838108 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 4056226E1AD8A1C700838108 /* Project.m */; };
-		405622701AD8A1C700838108 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 4056226E1AD8A1C700838108 /* Project.m */; };
 		405622791AD8AC6800838108 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622781AD8AC6800838108 /* ProjectManager.m */; };
 		4056227A1AD8AC6800838108 /* ProjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 405622781AD8AC6800838108 /* ProjectManager.m */; };
 		4099B5961B0EDAD700697C7C /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4099B5951B0EDAD700697C7C /* CloudKit.framework */; };
@@ -43,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40378AF61B268A3300E4CEF1 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		40378AF71B268A3300E4CEF1 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		405622401AD89FCF00838108 /* ProjectRadar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectRadar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		405622441AD89FCF00838108 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		405622451AD89FCF00838108 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -56,8 +58,6 @@
 		4056225C1AD89FD000838108 /* ProjectRadarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectRadarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		405622611AD89FD000838108 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		405622621AD89FD000838108 /* ProjectRadarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectRadarTests.m; sourceTree = "<group>"; };
-		4056226D1AD8A1C700838108 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Project.h; path = ../Project.h; sourceTree = "<group>"; };
-		4056226E1AD8A1C700838108 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Project.m; path = ../Project.m; sourceTree = "<group>"; };
 		405622771AD8AC6800838108 /* ProjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectManager.h; sourceTree = "<group>"; };
 		405622781AD8AC6800838108 /* ProjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectManager.m; sourceTree = "<group>"; };
 		4056227D1AD9BA6300838108 /* Deliverable+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Deliverable+Additions.h"; sourceTree = "<group>"; };
@@ -192,11 +192,11 @@
 		4056227B1AD8AC7100838108 /* core data */ = {
 			isa = PBXGroup;
 			children = (
+				40378AF61B268A3300E4CEF1 /* Project.h */,
+				40378AF71B268A3300E4CEF1 /* Project.m */,
 				40D41F331AFA70BE00F8CED8 /* Deliverable.h */,
 				40D41F341AFA70BE00F8CED8 /* Deliverable.m */,
 				4056224A1AD89FCF00838108 /* ProjectRadar.xcdatamodeld */,
-				4056226D1AD8A1C700838108 /* Project.h */,
-				4056226E1AD8A1C700838108 /* Project.m */,
 				4056227D1AD9BA6300838108 /* Deliverable+Additions.h */,
 				4056227E1AD9BA8400838108 /* Project+Additions.h */,
 			);
@@ -331,11 +331,11 @@
 				405622491AD89FCF00838108 /* AppDelegate.m in Sources */,
 				40D41F351AFA70BE00F8CED8 /* Deliverable.m in Sources */,
 				40D41F311AF999A200F8CED8 /* RadarView.m in Sources */,
+				40378AF81B268A3300E4CEF1 /* Project.m in Sources */,
 				4056224C1AD89FCF00838108 /* ProjectRadar.xcdatamodeld in Sources */,
 				4056224F1AD89FCF00838108 /* RadarViewController.m in Sources */,
 				40D41F0F1AF8228D00F8CED8 /* DeliverableViewController.m in Sources */,
 				405622791AD8AC6800838108 /* ProjectManager.m in Sources */,
-				4056226F1AD8A1C700838108 /* Project.m in Sources */,
 				40D41F131AF822F200F8CED8 /* ProjectViewController.m in Sources */,
 				405622461AD89FCF00838108 /* main.m in Sources */,
 			);
@@ -349,8 +349,8 @@
 				4056227A1AD8AC6800838108 /* ProjectManager.m in Sources */,
 				405622631AD89FD000838108 /* ProjectRadarTests.m in Sources */,
 				40D41F361AFA70BE00F8CED8 /* Deliverable.m in Sources */,
-				405622701AD8A1C700838108 /* Project.m in Sources */,
 				40D41F141AF822F200F8CED8 /* ProjectViewController.m in Sources */,
+				40378AF91B268A3300E4CEF1 /* Project.m in Sources */,
 				40D41F321AF999A200F8CED8 /* RadarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,8 +19,9 @@ static ProjectManager *ourSharedInstance = nil;
 @interface ProjectManager ()
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (readonly, strong, nonatomic) NSPersistentStore *persistentStore;
 @property (readonly, strong, nonatomic) NSPersistentStore *iCloudStore;
+
+@property (strong,nonatomic) id cloudToken; // icloud user identifier
 
 @end
 
@@ -31,6 +32,10 @@ static ProjectManager *ourSharedInstance = nil;
     self = [super init];
     if (self) {
         NSLog(@"initializing ProjectManager");
+        self.cloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
+        if (self.cloudToken) {
+            NSLog(@"iCloud is enabled");
+        }
         
     }
     return self;
@@ -204,13 +209,7 @@ static ProjectManager *ourSharedInstance = nil;
     // setup sqlite store
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:SQLITE_STORE_FILE];
     NSError *err = nil;
-    /*_persistentStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                                 configuration:nil URL:storeURL
-                                                                       options:nil error:&err];
-    if (self.persistentStore == nil) {
-        NSLog(@"persistent store init failure: %@", err);
-    } */
-
+    
     // setup cloudkit store
     NSDictionary *options = @{ NSMigratePersistentStoresAutomaticallyOption: @YES,
                               NSInferMappingModelAutomaticallyOption: @YES,
@@ -226,7 +225,7 @@ static ProjectManager *ourSharedInstance = nil;
     _iCloudStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                                  configuration:nil URL:storeURL
                                                                        options:options error:&err];
-    if (self.iCloudStore){
+    /*if (self.iCloudStore){
         NSLog(@"cloud store configured at: %@",self.iCloudStore.URL.path);
     }
     if (self.iCloudStore == nil) {
@@ -236,11 +235,10 @@ static ProjectManager *ourSharedInstance = nil;
         NSFileManager *fm = [NSFileManager defaultManager];
         NSURL *cloudURL = [fm URLForUbiquityContainerIdentifier:UBIQUITY_KEY];
         NSLog(@"cloudURL = %@", cloudURL);
-        id cloudToken = fm.ubiquityIdentityToken;
-        NSLog(@"cloudToken = %@", cloudToken);
-    }
+        //id cloudToken = fm.ubiquityIdentityToken;
+        //NSLog(@"cloudToken = %@", cloudToken);
+    } */
     
-    [self registerForStoreChangeNotifs];
     
     return _persistentStoreCoordinator;
 }
@@ -261,35 +259,6 @@ static ProjectManager *ourSharedInstance = nil;
     return _managedObjectContext;
 }
 
-#pragma mark - iCloud notifs
-
--(void) registerForStoreChangeNotifs {
-    NSNotificationCenter *ns = [NSNotificationCenter defaultCenter];
-    // will change
-    [ns addObserver:self selector:@selector(storeWillChange:)
-               name:NSPersistentStoreCoordinatorStoresWillChangeNotification
-             object:self.persistentStoreCoordinator];
-    // did change
-    [ns addObserver:self selector:@selector(storeDidChange:)
-               name:NSPersistentStoreCoordinatorStoresDidChangeNotification
-             object:self.persistentStoreCoordinator];
-    // imported cloudy stuff
-    [ns addObserver:self selector:@selector(didImport_iCloudChanges:)
-               name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-            object:self.persistentStoreCoordinator];
-
-}
-
--(void) storeWillChange:(NSNotification*)notif {
-    NSLog(@"Core data will change++++++++++++++++++++++++++++++++++++++++++++");
-    
-}
--(void) storeDidChange:(NSNotification*)notif {
-    NSLog(@"core data did change++++++++++++++++++++++++++++++++++++++++++++++");
-}
--(void) didImport_iCloudChanges:(NSNotification*)notif {
-    NSLog(@"got cloudy shit++++++++++++++++++++++++++++++++++++++++++++++++++++");
-}
 
 #pragma mark - Core Data Saving support
 
