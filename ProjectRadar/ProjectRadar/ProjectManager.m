@@ -207,7 +207,7 @@ static ProjectManager *ourSharedInstance = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     
     // setup sqlite store
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:SQLITE_STORE_FILE];
+    //NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:SQLITE_STORE_FILE];
     NSError *err = nil;
     
     // setup cloudkit store
@@ -216,7 +216,7 @@ static ProjectManager *ourSharedInstance = nil;
                               NSPersistentStoreUbiquitousContentNameKey: UBIQUITY_KEY
                               };
     
-    storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ProjectRadar-iCloud.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ProjectRadar-iCloud.sqlite"];
     NSFileManager *fm = [NSFileManager defaultManager];
     NSURL *cloudURL = [fm URLForUbiquityContainerIdentifier:nil];
     NSLog(@"cloud URL = %@",cloudURL);
@@ -225,20 +225,6 @@ static ProjectManager *ourSharedInstance = nil;
     _iCloudStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                                  configuration:nil URL:storeURL
                                                                        options:options error:&err];
-    /*if (self.iCloudStore){
-        NSLog(@"cloud store configured at: %@",self.iCloudStore.URL.path);
-    }
-    if (self.iCloudStore == nil) {
-        NSLog(@"cloud error: %@",err);
-    } else {
-        NSLog(@"cloud support added");
-        NSFileManager *fm = [NSFileManager defaultManager];
-        NSURL *cloudURL = [fm URLForUbiquityContainerIdentifier:UBIQUITY_KEY];
-        NSLog(@"cloudURL = %@", cloudURL);
-        //id cloudToken = fm.ubiquityIdentityToken;
-        //NSLog(@"cloudToken = %@", cloudToken);
-    } */
-    
     
     return _persistentStoreCoordinator;
 }
